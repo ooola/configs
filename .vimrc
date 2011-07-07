@@ -1,22 +1,16 @@
 colorscheme desert
 set tabstop=4 shiftwidth=4 expandtab ruler
 set nohlsearch
-set fileformat=dos
-set shell=c:\windows\system32\cmd.exe
 set shellcmdflag=/C
 set nocompatible
 set backupcopy=no
 set backupdir=~/tmp/
 
-cab p4edit !p4vim j: %:p:h %
+if has("win32") || has("win64")
+    set fileformat=dos
+    set shell=c:\windows\system32\cmd.exe
+endif
 
-" should use the following abrreviations
-"ab ,tm <xsl:template match=""></xsl:template>
-"ab ,at <xsl:apply-templates/> 
-
-
-" Use vim? Put this in your .vimrc:
-" 
 " map <F5> :s.^//.. <CR> :noh <CR>
 " map <F6> :s.^.//. <CR> :noh <CR>
 " Now you use a visual line select (shift-V) to select what you want to comment,
