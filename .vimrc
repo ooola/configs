@@ -36,15 +36,38 @@ autocmd BufRead *.py highlight BadWhitespace ctermbg=red guibg=red
 autocmd BufRead *.py match BadWhitespace /^\t\+/
 autocmd BufRead *.py match BadWhitespace /\s\+$/
 
-"the commands below are not needed since there is a python vim filetype that
-"set's everything via the 'filetype plugin indent on' command
-"autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-"autocmd BufRead *.py inoremap # X^H#
-"autocmd BufRead *.py set tabstop=4
-"autocmd BufRead *.py set shiftwidth=4
-"autocmd BufRead *.py set smarttab
-"autocmd BufRead *.py set expandtab
-"autocmd BufRead *.py set softtabstop=4
-"autocmd BufRead *.py set autoindent
+set list listchars=tab:?·,trail:·,nbsp:·
+set statusline=%F%m%r%h%w\ [TYPE=%Y\ %{&ff}]\
+\ [%l/%L\ (%p%%)
 
+au FileType py set autoindent " not sure if this is needed
+au FileType py set smartindent " not sure if needed
+au FileType py set textwidth=79 " PEP-8 Friendly
 
+" See http://justinlilly.com/vim/vim_and_python.html
+
+" NERD_tree config
+let NERDTreeChDirMode=2
+let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$', '\.swp$']
+let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\~$']
+let NERDTreeShowBookmarks=1
+map <F3> :NERDTreeToggle<CR>
+
+" Syntax for multiple tag files are
+" set tags=/my/dir1/tags, /my/dir2/tags
+set tags=tags;$HOME/.vim/tags/
+
+" TagList Plugin Configuration
+let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
+let Tlist_GainFocus_On_ToggleOpen = 1
+let Tlist_Close_On_Select = 1
+let Tlist_Use_Right_Window = 1
+let Tlist_File_Fold_Auto_Close = 1
+map <F7> :TlistToggle<CR>
+
+" Viewport Controls
+" ie moving between split panes
+map <silent>,h <C-w>h
+map <silent>,j <C-w>j
+map <silent>,k <C-w>k
+map <silent>,l <C-w>l
