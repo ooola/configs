@@ -11,6 +11,10 @@ if has("win32") || has("win64")
     set shell=c:\windows\system32\cmd.exe
 endif
 
+if has('gui_running')
+    set guifont=Monospace\ 12
+endif
+
 " map <F5> :s.^//.. <CR> :noh <CR>
 " map <F6> :s.^.//. <CR> :noh <CR>
 " Now you use a visual line select (shift-V) to select what you want to comment,
@@ -36,7 +40,7 @@ autocmd BufRead *.py highlight BadWhitespace ctermbg=red guibg=red
 autocmd BufRead *.py match BadWhitespace /^\t\+/
 autocmd BufRead *.py match BadWhitespace /\s\+$/
 
-set list listchars=tab:?·,trail:·,nbsp:·
+"set list listchars=tab:?·,trail:·,nbsp:·
 set statusline=%F%m%r%h%w\ [TYPE=%Y\ %{&ff}]\
 \ [%l/%L\ (%p%%)
 
