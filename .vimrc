@@ -1,14 +1,14 @@
 colorscheme desert
 set tabstop=4 shiftwidth=4 expandtab ruler
 set nohlsearch
-set shellcmdflag=/C
 set nocompatible
 set backupcopy=no
 set backupdir=~/tmp/
 
 if has("win32") || has("win64")
     set fileformat=dos
-    set shell=c:\windows\system32\cmd.exe
+    set shell=powershell.exe
+    set shellcmdflag=/C
 endif
 
 if has('gui_running')
@@ -49,6 +49,8 @@ au FileType py set smartindent " not sure if needed
 au FileType py set textwidth=79 " PEP-8 Friendly
 
 " See http://justinlilly.com/vim/vim_and_python.html
+
+au BufRead *.txt set textwidth=79
 
 " NERD_tree config
 let NERDTreeChDirMode=2
