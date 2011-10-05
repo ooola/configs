@@ -51,6 +51,7 @@ au FileType py set textwidth=79 " PEP-8 Friendly
 " See http://justinlilly.com/vim/vim_and_python.html
 
 au BufRead *.txt set textwidth=79
+au BufRead *.txt setlocal spell spelllang=en_US 
 
 " NERD_tree config
 let NERDTreeChDirMode=2
