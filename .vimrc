@@ -4,6 +4,7 @@ set nohlsearch
 set nocompatible
 set backupcopy=no
 set backupdir=~/tmp/
+set visualbell
 
 if has("win32") || has("win64")
     set fileformat=dos
