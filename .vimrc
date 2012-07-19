@@ -30,13 +30,13 @@ endif
 " set tags=\src\tags,\src\gfx\tags
 
 syntax on
-filetype on
-filetype plugin on
-filetype indent on      
+"filetype on
+"filetype plugin on
+"filetype indent on      
 filetype plugin indent on  " This actually turns on ft detection, plugin and indent
 "                          So previous commands were redundant. See :filetype
 autocmd Filetype go set makeprg=go\ build
-autocmd Filetype go set tabstop=8 shiftwidth=8 noexpandtab smartindent
+"autocmd Filetype go set tabstop=8 shiftwidth=8 noexpandtab
 autocmd FileType c,cpp :set cindent 
 autocmd BufRead *.py highlight BadWhitespace ctermbg=red guibg=red
 autocmd BufRead *.py match BadWhitespace /^\t\+/
