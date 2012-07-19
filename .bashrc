@@ -85,6 +85,9 @@ done
 export PATH; unset _PATH
 IFS=$_IFS; unset _IFS
 
+export GOBIN=$HOME/bin
+export GOROOT=/usr/local/go
+
 case $HOSTNAME in
     *thor*)
         HOST="thor"
