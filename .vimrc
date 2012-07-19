@@ -1,5 +1,4 @@
 colorscheme desert
-set tabstop=4 shiftwidth=4 expandtab ruler
 set nohlsearch
 set nocompatible
 set backupcopy=no
@@ -36,10 +35,15 @@ filetype plugin on
 filetype indent on      
 filetype plugin indent on  " This actually turns on ft detection, plugin and indent
 "                          So previous commands were redundant. See :filetype
+autocmd Filetype go set makeprg=go\ build
+autocmd Filetype go set tabstop=8 shiftwidth=8 noexpandtab smartindent
 autocmd FileType c,cpp :set cindent 
 autocmd BufRead *.py highlight BadWhitespace ctermbg=red guibg=red
 autocmd BufRead *.py match BadWhitespace /^\t\+/
 autocmd BufRead *.py match BadWhitespace /\s\+$/
+
+" enable omni completion
+set ofu=syntaxcomplete#Complete
 
 "set list listchars=tab:?·,trail:·,nbsp:·
 set statusline=%F%m%r%h%w\ [TYPE=%Y\ %{&ff}]\
@@ -53,6 +57,7 @@ au FileType py set textwidth=79 " PEP-8 Friendly
 
 au BufRead *.txt set textwidth=79
 au BufRead *.txt setlocal spell spelllang=en_us 
+au BufRead *.txt set tabstop=4 shiftwidth=4 expandtab ruler
 
 " NERD_tree config
 let NERDTreeChDirMode=2
