@@ -178,7 +178,11 @@ export CALENDAR_DIR="~/.calendar"
 # umask 066      makes files -rw------- and directories -rwx------
 umask 066
 
+# Ola linux eterm
 [ "$TERM" = xterm ] && export PROMPT_COMMAND='echo -ne "\033]0;ETerm .:. ${PWD}\007"'
+
+#Mac term is xterm-color
+[ "$TERM" = xterm-color ] && export PROMPT_COMMAND='echo -ne "\033]0;${USER} .:. ${PWD}\007"'
 
 if [ -f ~/.bash_history ]; then
   rm ~/.bash_history; ln -s /dev/null ~/.bash_history
@@ -209,8 +213,9 @@ function man()
 
 function vi()
 {
-    xtitle "-::$(pwd)::-  vim $@"
-    vim -T ansi $@
+    local NAME=$(basename $@)
+    echo -n -e "\033]0; vi $NAME \007"
+    /usr/bin/vi $@
 }
 # swap 2 filenames
 function swap()
@@ -279,9 +284,7 @@ distribute()
 {
   LOGFILE="$HOME/tmp/distrc.log"
   # List of the hosts I have accounts on
-  hosts="cbox
-         nalo@helsinki.cc.gatech.edu
-         coke
+  hosts="scrape
          "
   exec 2>"$LOGFILE"
   cp ~/.bashrc ~/.bashrc.sav
@@ -342,8 +345,6 @@ complete -f -X '!*.+(gz|tgz|Gz|Z)' gunzip gzcat zcat zmore gzip
 complete -f -X '!*.Z' uncompress
 complete -f -X '!*.+(diff.patch)' patch
 complete -f -X '!*.+(png|gif|jpg|jpeg|GIF|JPG|bmp|tif|tiff)' gqview
-#complete -W '`awk '\''{print $1;}'\'' < ~/.ssh/known_hosts2`' scp ssh
-complete -f -X '!*.+(c|cc|C|cpp|c++|h|gz|rc|txt|Makefile|README)' vim
 complete -f -X '!*.+(divx|DivX|asf|ASF|avi|AVI)' aviplay xine
 complete -f -X '!*.mp+(e|)g' xmovie gtv xine
 complete -f -X '!*.pdf' acroread 
