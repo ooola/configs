@@ -78,7 +78,7 @@ _IFS="$IFS"; IFS=:
 _PATH="$PATH"; PATH=
 for path in $HOME/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin \
     /sbin /usr/X11R6/bin usr/share/texmf/bin /skiff/local/bin \
-    /usr/lib/jdk1.3.1/bin \
+    /usr/lib/jdk1.3.1/bin $HOME/go/bin \
     $_PATH; do
     myaddpath $path
 done
@@ -87,6 +87,7 @@ IFS=$_IFS; unset _IFS
 
 export GOBIN=$HOME/bin
 export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
 
 case $HOSTNAME in
     *thor*)
