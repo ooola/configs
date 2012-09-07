@@ -93,7 +93,7 @@ case $HOSTNAME in
         ;;
     *scrape*)
         HOST="scrape" 
-	export GOROOT=/usr/local/go
+	export GOROOT=/usr/lib/go
         ;;
 esac
 
@@ -239,7 +239,7 @@ synccomp()
   H=$HOME
   FILES="$H/.bashrc $H/.vim $H/.vimrc $H/.inputrc"
   if [ `hostname` = "silver" ]; then
-    rsync -av --delete --force -e ssh $FILES scrape:.
+    rsync -av --delete --force -e "ssh -o ClearAllForwardings=yes" $FILES scrape:.
   else
     echo "unknown host"
   fi
