@@ -8,7 +8,7 @@
 # [ -f "$HOME/.bashrc" ] && . $HOME/.bashrc
 # 
 
-usernames="ola nalo gte743m"
+usernames="ola"
 # Figure out what our username is on this system
 case " $usernames " in
     *" $USER "*)
@@ -30,13 +30,10 @@ alias x='startx'
 #alias ls='ls --color'
 alias la='ls -a'
 alias ll='ls -l'
-alias realplay='/usr/local/RealPlayer8/realplay'
 alias verify='ssh-add ~/.ssh/id_dsa'
 alias destruct='ssh-add -D'
 alias ant='cvs up >& /dev/null; /usr/bin/ant'
-alias newmail='mailstat ~/.Procmail/log'
 #alias resource='killall -USR1 bash'
-#export CLASSPATH=".:/usr/lib/jdk1.3.1/jre/lib/rt.jar" # for jikes
 
 # todo support
 export TODO=~/Dropbox/todo
@@ -90,28 +87,13 @@ export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
 
 case $HOSTNAME in
-    *thor*)
-        HOST="thor"
-        export CVSROOT=':ext:ola@coke.runslinux.net:/home/cvs'
-        export CVS_RSH='ssh'
-        export MANPATH=$MANPATH:/usr/share/man
+    *silver*)
+        HOST="silver"
+	export GOROOT=/usr/local/go
         ;;
-    *jewel*)
-        HOST="jewel" 
-        export CVSROOT=':ext:ola@coke.runslinux.net:/home/cvs'
-        export CVS_RSH='ssh'
-        export MANPATH=$MANPATH:/usr/share/man
-        ;;
-    *cbox*)
-        HOST="cbox" 
-        export TERM="linux" ;;
-    acme*)
-        export WRECKDIR=~gtwreck
-        export PATH="$PATH:$WRECKDIR/bin:$WRECKDIR/bin/X11"
-        export MANPATH="/usr/man:/usr/local/man"
-        ;;
-    helsinki*)
-        HOST="helsinki"
+    *scrape*)
+        HOST="scrape" 
+	export GOROOT=/usr/local/go
         ;;
 esac
 
@@ -168,7 +150,7 @@ export dotglob=1      # expand . files in expansions please
 export cdspell=1      # fix cd <dir> spell errors
 export histappend=0   # don't write the history file
 export EDITOR='vim'
-export REPLYTO='ola@triblock.com'
+export REPLYTO='ola.nordstrom@gmail.com'
 export COLORFGBG="lightgray;black" # needed for the slang library, hench mutt "default" color
 export CALENDAR_DIR="~/.calendar"
 
@@ -251,64 +233,26 @@ function repeat()       # repeat n times command
   done
 }
 
-# sync jewel and thor directories
+# sync silver and scrape directories
 synccomp()
 {
   H=$HOME
-  FILES="$H/Skola $H/html $H/new $H/bin $H/doc $H/notes $H/.bashrc"
-  FILES="$FILES $H/.vimrc $H/.vim $H/code $H/.gaim $H/.gaimrc"
-  FILES="$FILES $H/.galeon/bookmarks.xml $H/.galeon/bookmarks.xbel "
-  if [ `hostname` = "jewel" ]; then
-    rsync -av --delete --force -e ssh $FILES thor:.
+  FILES="$H/.bashrc $H/.vim $H/.vimrc $H/.inputrc"
+  if [ `hostname` = "silver" ]; then
+    rsync -av --delete --force -e ssh $FILES scrape:.
   else
-    rsync -av --delete --force -e ssh $FILES jewel:.
+    echo "unknown host"
   fi
 }
 
 ipaddr()
 {
   if [ ! $# = 1 ]; then
-    INTERFACE="eth0"
+    INTERFACE="en0"
   else
     INTERFACE="$1"
   fi
-  ifconfig $INTERFACE | grep inet | awk '{print $2}' | awk -F: '{print $2}'
-}
-
-upload()
-{
-  scp $? karp:~/html 
-  ssh karp "chmod 644 ~/html/bitbucket/*"
-}
-
-distribute()
-{
-  LOGFILE="$HOME/tmp/distrc.log"
-  # List of the hosts I have accounts on
-  hosts="scrape
-         "
-  exec 2>"$LOGFILE"
-  cp ~/.bashrc ~/.bashrc.sav
-  for host in $hosts; do
-    ( ( scp -r ~/.temple ~/.bashrc ~/.vimrc ~/.inputrc $host: 1>&2
-      rc=$?
-      echo "    ^^^ $host ^^^" 1>&2
-      if [ $rc -eq 0 ]; then
-        echo -e "\033[1;32m$host\033[0m"
-      elif [ $rc -lt 128 ]; then
-        echo -e "\033[1;31m$host\033[0m"
-      fi    
-      ) &
-      pid=$!
-      i=0
-      while { sleep 10; kill -CHLD $pid 2>/dev/null && [ $i -lt 10 ]; }; do
-        echo "Waiting for $host (pid $pid) . . ."
-        i=$[i+1]
-        done
-        kill $pid 2>/dev/null && echo -e "\033[1;33m$host\033[0m"
-    ) &
-    sleep 1
-  done
+  ifconfig $INTERFACE | grep 'inet ' | awk '{print $2}'
 }
 
 # extended globbing
