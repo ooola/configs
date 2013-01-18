@@ -82,18 +82,18 @@ done
 export PATH; unset _PATH
 IFS=$_IFS; unset _IFS
 
+eval [ -f "$HOME/goroot/golang-crosscompile/crosscompile.bash" ] && eval source "$HOME/goroot/golang-crosscompile/crosscompile.bash"
+
 export GOBIN=$HOME/bin
-export GOROOT=/usr/local/go
+export GOROOT=$HOME/goroot/go
 export GOPATH=$HOME/go
 
 case $HOSTNAME in
     *silver*)
         HOST="silver"
-	export GOROOT=/usr/local/go
         ;;
     *scrape*)
         HOST="scrape" 
-	export GOROOT=/usr/lib/go
         ;;
 esac
 
@@ -135,7 +135,12 @@ NC="\[\033[0m\]"
 #PS1="$COLOR3\u$C_GREN@$C_PINK\h\$( if \$(ssh-add -l 2>/dev/null | grep "^[:alnum:]*" > /dev/null; then echo \"$C_NEON(KEYS)\") fi $C_BLUE|\$(date +%T)|$C_PINK\w$C_BLUE|$C_WHTE\n\$ "
 #PS1="$COLOR3\u$C_GREN@$C_PINK\h\$( "`ssh-add -l | grep 'The agent has no id' >& /dev/null`" -gt 0 ] && echo '-KEYS-';)$C_BLUE|\$(date +%T)|$C_PINK\w$C_BLUE|$C_WHTE\n\$ "
 
-PS1="$COLOR3\u$C_GREN@$C_PINK\h\$([ \"\$(ssh-add -l)\" = \"The agent has no identities.\" ] || echo \"$C_NEON(KEYS)\")$C_BLUE|\$(date +%T)|$C_PINK\w$C_BLUE|$C_WHTE\n\$ "
+if [ $HOSTNAME = "silver" ];
+then
+	PS1="$COLOR3\u$C_GREN@$C_PINK\h\$([ \"\$(ssh-add -l)\" = \"The agent has no identities.\" ] || echo \"$C_NEON(KEYS)\")$C_BLUE|\$(date +%T)|$C_PINK\w$C_BLUE|$C_WHTE\n\$ "
+else
+	PS1="$COLOR3\u$C_GREN@$C_PINK\h$C_BLUE|\$(date +%T)|$C_PINK\w$C_BLUE|$C_WHTE\n\$ "
+fi
 
 export PS1
 export PS2='> '
