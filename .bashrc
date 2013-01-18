@@ -135,11 +135,7 @@ NC="\[\033[0m\]"
 #PS1="$COLOR3\u$C_GREN@$C_PINK\h\$( if \$(ssh-add -l 2>/dev/null | grep "^[:alnum:]*" > /dev/null; then echo \"$C_NEON(KEYS)\") fi $C_BLUE|\$(date +%T)|$C_PINK\w$C_BLUE|$C_WHTE\n\$ "
 #PS1="$COLOR3\u$C_GREN@$C_PINK\h\$( "`ssh-add -l | grep 'The agent has no id' >& /dev/null`" -gt 0 ] && echo '-KEYS-';)$C_BLUE|\$(date +%T)|$C_PINK\w$C_BLUE|$C_WHTE\n\$ "
 
-if [ -n "$DISPLAY" ]; then
-  PS1="$COLOR3\u$C_GREN@$C_PINK\h\$([ \"\$(ssh-add -l)\" = \"The agent has no identities.\" ] || echo \"$C_NEON(KEYS)\")$C_BLUE|\$(date +%T)|$C_PINK\w$C_BLUE|$C_WHTE\n\$ "
-else
-  PS1="$COLOR3\u$C_GREN@$C_PINK\h$C_BLUE|\$(date +%T)|$C_PINK\w$C_BLUE|$C_WHTE\n\$ "
-fi
+PS1="$COLOR3\u$C_GREN@$C_PINK\h\$([ \"\$(ssh-add -l)\" = \"The agent has no identities.\" ] || echo \"$C_NEON(KEYS)\")$C_BLUE|\$(date +%T)|$C_PINK\w$C_BLUE|$C_WHTE\n\$ "
 
 export PS1
 export PS2='> '
