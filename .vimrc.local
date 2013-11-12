@@ -4,3 +4,4 @@ set guioptions+=T               "turn on the toolbar
 set t_Co=256                    "SApprox skipped; terminal only has 8 colors, not 88/256 in
 set wrap
 set clipboard=unnamed
+set nocursorline                "slows down redrawing
