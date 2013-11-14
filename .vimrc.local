@@ -5,3 +5,10 @@ set t_Co=256                    "SApprox skipped; terminal only has 8 colors, no
 set wrap
 set clipboard=unnamed
 set nocursorline                "slows down redrawing
+
+let g:enable_numbers=0          "disable relative numbering
+let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'go']
+autocmd Filetype go set makeprg=go\ build
+autocmd Filetype go set tabstop=8 shiftwidth=8 noexpandtab
+autocmd Filetype go set nolist  "dont show tab highlights
+
