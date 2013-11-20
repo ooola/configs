@@ -11,7 +11,8 @@ let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'go']
 " install https://github.com/nsf/gocode and add GOPATH/bin to path to make sure
 " omnicompletion c-x c-o works
 autocmd Filetype go set makeprg=go\ build
-autocmd Filetype go set tabstop=8 shiftwidth=8 noexpandtab
+autocmd Filetype go set tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
+autocmd Filetype go set copyindent preserveindent
 autocmd Filetype go set nolist  "dont show tab highlights
 
 let NERDTreeQuitOnOpen = 0
