@@ -17,4 +17,14 @@ autocmd Filetype go set tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
 autocmd Filetype go set copyindent preserveindent
 autocmd Filetype go set nolist  "dont show tab highlights
 
+" web editing settings
+autocmd Filetype html set tabstop=2 shiftwidth=2 softtabstop=2
+
 let NERDTreeQuitOnOpen = 0
+
+" Viewport Controls
+" ie moving between split panes
+map <silent>,h <C-w>h
+map <silent>,j <C-w>j
+map <silent>,k <C-w>k
+map <silent>,l <C-w>l
