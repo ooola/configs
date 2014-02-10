@@ -1,9 +1,7 @@
 #!/bin/bash
 # Ola's startup scripts (~/.bashrc)
-# Last Modified: Fri Nov 16 01:58:59 EST 2001
-#
-# Give credit where it is due: many advanced features in this I have
-# taken from jehsoms bashrc, this .bashrc should be accompanied by a
+
+# this .bashrc should be accompanied by a
 # .bash_profile containing one line
 # [ -f "$HOME/.bashrc" ] && . $HOME/.bashrc
 # 
@@ -60,9 +58,11 @@ esac
 if [ "$os" = "linux" ]; then
   export LS_COLORS="no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:bd=40;33;01:cd=40;33;01:or=01;05;37;41:mi=01;05;37;41:*.tar=01;31:*.tgz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.rpm=01;31:*.jpg=01;35:*.gif=01;35:*.bmp=01;35:*.pdf=01;35:*.h=00;31:*.cpp=00;36:*.c=00;36:ex=01;32"
   alias ls='ls --color'
-  else
-    export CLICOLOR=1 TERM=xterm-color
-    alias ls='ls -F'
+else
+    export CLICOLOR=1
+    export TERM=xterm-256color
+    export LSCOLORS=GxFxCxDxBxegedabagaced
+    #alias ls='ls -F'
 fi
 
 # This addpath adds a path only if it's not already in $PATH and it's a dir.
@@ -82,9 +82,11 @@ done
 export PATH; unset _PATH
 IFS=$_IFS; unset _IFS
 
-eval [ -f "$HOME/goroot/golang-crosscompile/crosscompile.bash" ] && eval source "$HOME/goroot/golang-crosscompile/crosscompile.bash"
+# for whatever reason this sets the TERM=dumb which removes colors in the Terminal on OS X
+#eval [ -f "$HOME/goroot/golang-crosscompile/crosscompile.bash" ] && eval source "$HOME/goroot/golang-crosscompile/crosscompile.bash"
+#
 
-export GOBIN=$HOME/bin
+#export GOBIN=$HOME/bin
 export GOROOT=$HOME/goroot/go
 export GOPATH=$HOME/go
 
@@ -96,6 +98,8 @@ case $HOSTNAME in
         HOST="scrape" 
         ;;
 esac
+
+export OLAOLA=SHISHI
 
 export HOST=${HOST:-${HOSTNAME%%.*}}
 
@@ -165,8 +169,8 @@ umask 066
 # Ola linux eterm
 [ "$TERM" = xterm ] && export PROMPT_COMMAND='echo -ne "\033]0;ETerm .:. ${PWD}\007"'
 
-#Mac term is xterm-color
-[ "$TERM" = xterm-color ] && export PROMPT_COMMAND='echo -ne "\033]0;${USER} .:. ${PWD}\007"'
+#Mac term is xterm-256color
+[ "$TERM" = xterm-256color ] && export PROMPT_COMMAND='echo -ne "\033]0;${USER} .:. ${PWD}\007"'
 
 if [ -f ~/.bash_history ]; then
   rm ~/.bash_history; ln -s /dev/null ~/.bash_history
@@ -195,12 +199,12 @@ function man()
     /usr/bin/man $@
 }
 
-function vi()
-{
-    local NAME=$(basename $@)
-    echo -n -e "\033]0; vi $NAME \007"
-    /usr/bin/vi $@
-}
+## function vi()
+## {
+##     local NAME=$(basename $@)
+##     export PROMPT_COMMAND='echo -n -e "\033]0; vim $NAME \007"'
+##     /usr/bin/vi $@
+## }
 # swap 2 filenames
 function swap()
 {
