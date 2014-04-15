@@ -142,6 +142,13 @@ else
 	PS1="$COLOR3\u$C_GREN@$C_PINK\h$C_BLUE|\$(date +%T)|$C_PINK\w$C_BLUE|$C_WHTE\n\$ "
 fi
 
+if [ $HOSTNAME = "bb" ];
+then 
+    export P4USER=olan
+    export P4PASSWD=05f35b6bad
+    export P4CONFIG=p4config.txt
+fi
+
 export PS1
 export PS2='> '
 export ignoreeof=0
@@ -163,7 +170,7 @@ export CALENDAR_DIR="~/.calendar"
 umask 066
 
 # Ola linux eterm
-[ "$TERM" = xterm ] && export PROMPT_COMMAND='echo -ne "\033]0;ETerm .:. ${PWD}\007"'
+[ "$TERM" = xterm ] && export PROMPT_COMMAND='echo -ne "\033]0;Terminology .:. ${PWD}\007"'
 
 #Mac term is xterm-color
 [ "$TERM" = xterm-color ] && export PROMPT_COMMAND='echo -ne "\033]0;${USER} .:. ${PWD}\007"'
