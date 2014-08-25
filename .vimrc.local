@@ -5,6 +5,7 @@ set t_Co=256                    "SApprox skipped; terminal only has 8 colors, no
 set wrap
 set clipboard=unnamed
 set nocursorline                "slows down redrawing
+set nofoldenable
 
 let g:enable_numbers=0          "disable relative numbering
 let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'go']
