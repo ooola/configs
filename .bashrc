@@ -86,8 +86,7 @@ IFS=$_IFS; unset _IFS
 #eval [ -f "$HOME/goroot/golang-crosscompile/crosscompile.bash" ] && eval source "$HOME/goroot/golang-crosscompile/crosscompile.bash"
 #
 
-#export GOBIN=$HOME/bin
-export GOROOT=$HOME/goroot/go
+export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
 
 case $HOSTNAME in
@@ -197,6 +196,11 @@ function man()
 {
     xtitle "man $@"
     /usr/bin/man $@
+}
+
+function getrands()
+{
+    for i in {1..5};do od -vAn -N4 -tu4 < /dev/urandom; done
 }
 
 ## function vi()
