@@ -73,9 +73,10 @@ function myaddpath () {
 # Set path properly. Insert all paths you'd ever want to have in your $PATH.
 _IFS="$IFS"; IFS=:
 _PATH="$PATH"; PATH=
+[ -e /usr/local/bin/go ] && GOBINS="$(/usr/local/bin/go env GOROOT)/bin"
 for path in $HOME/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin \
-    /sbin /usr/X11R6/bin usr/share/texmf/bin /skiff/local/bin \
-    /usr/lib/jdk1.3.1/bin $HOME/go/bin \
+    /sbin /usr/X11R6/bin usr/share/texmf/bin /usr/local/opt/go/bin \
+    /usr/lib/jdk1.3.1/bin $GOBINS \
     $_PATH; do
     myaddpath $path
 done
@@ -86,7 +87,7 @@ IFS=$_IFS; unset _IFS
 #eval [ -f "$HOME/goroot/golang-crosscompile/crosscompile.bash" ] && eval source "$HOME/goroot/golang-crosscompile/crosscompile.bash"
 #
 
-export GOROOT=/usr/local/go
+#export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
 
 case $HOSTNAME in
@@ -145,13 +146,6 @@ else
 	PS1="$COLOR3\u$C_GREN@$C_PINK\h$C_BLUE|\$(date +%T)|$C_PINK\w$C_BLUE|$C_WHTE\n\$ "
 fi
 
-if [ $HOSTNAME = "bb" ];
-then 
-    export P4USER=olan
-    export P4PASSWD=05f35b6bad
-    export P4CONFIG=p4config.txt
-fi
-
 export PS1
 export PS2='> '
 export ignoreeof=0
@@ -173,7 +167,7 @@ export CALENDAR_DIR="~/.calendar"
 umask 066
 
 # Ola linux eterm
-[ "$TERM" = xterm ] && export PROMPT_COMMAND='echo -ne "\033]0;Terminology .:. ${PWD}\007"'
+[ "$TERM" = xterm ] && export PROMPT_COMMAND='echo -ne "\033]0;ETerm .:. ${PWD}\007"'
 
 #Mac term is xterm-256color
 [ "$TERM" = xterm-256color ] && export PROMPT_COMMAND='echo -ne "\033]0;${USER} .:. ${PWD}\007"'
@@ -276,46 +270,6 @@ shopt -s extglob
 set +o nounset    # otherwise some completions will fail
 bind 'TAB:complete'    
 
-complete -A hostname   rsh rcp telnet rlogin ftp ping disk
-complete -A command    nohup exec eval trace gdb
-complete -A command    command type which
-complete -A export     printenv
-complete -A variable   export local readonly unset
-complete -A enabled    builtin
-complete -A alias      alias unalias
-complete -A function   function
-complete -A user       su mail finger
-
-complete -A helptopic  help     # currently same as builtins
-complete -A shopt      shopt
-complete -A stopped -P '%' bg 
-complete -A job -P '%'     fg jobs disown
-
-complete -A directory  mkdir rmdir                         
-complete -A directory  -o default cd
-
-complete -f chown ln more less cat strip
-complete -d mkdir rmdir
-complete -u su
-complete -W '`/bin/ls /var/log/packages/`' removepkg
-complete -f -X '!*.tgz' installpkg
-complete -f -X '*.gz' gunzip gzip
-complete -f -X '*.Z' compress
-complete -f -X '*.bz2' bzip2
-complete -f -X '!*.+(gz|tgz|Gz|Z)' gunzip gzcat zcat zmore gzip
-complete -f -X '!*.Z' uncompress
-complete -f -X '!*.+(diff.patch)' patch
-complete -f -X '!*.+(png|gif|jpg|jpeg|GIF|JPG|bmp|tif|tiff)' gqview
-complete -f -X '!*.+(divx|DivX|asf|ASF|avi|AVI)' aviplay xine
-complete -f -X '!*.mp+(e|)g' xmovie gtv xine
-complete -f -X '!*.pdf' acroread 
-complete -f -X '!*.html' appletviewer
-complete -f -X '!*.java' javac jikes
-complete -f -X '!*.+(ps|dvi)' gv ggv
-complete -f -X '!*.tex' pdflatex pslatex tex latex
-complete -f -X '!*.+(avi|AVI|mpg|MPG|mpeg|mov|MOV)' xanim xine
-#complete -W 'add checkout commit diff export history import login rdiff release remove rtag status tag update' cvs
-
 # from abs
 _make_targets ()
 {
@@ -367,3 +321,8 @@ _make_targets ()
 }                                                          
                                                            
 complete -F _make_targets -X '+($*|*.[cho])' make gmake pmake
+
+## Use Homebrew completion
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+    . `brew --prefix`/etc/bash_completion
+fi
