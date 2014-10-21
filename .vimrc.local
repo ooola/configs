@@ -7,6 +7,12 @@ set clipboard=unnamed
 set nocursorline                "slows down redrawing
 set nofoldenable
 
+" disable the error bell in terminal and GUI
+set noerrorbells visualbell t_vb=
+if has('autocmd')
+  autocmd GUIEnter * set visualbell t_vb=
+endif
+
 let g:enable_numbers=0          "disable relative numbering
 let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'go']
 " install https://github.com/nsf/gocode and add GOPATH/bin to path to make sure
