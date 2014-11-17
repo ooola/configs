@@ -76,7 +76,7 @@ _PATH="$PATH"; PATH=
 [ -e /usr/local/bin/go ] && GOBINS="$(/usr/local/bin/go env GOROOT)/bin"
 for path in $HOME/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin \
     /sbin /usr/X11R6/bin usr/share/texmf/bin /usr/local/opt/go/bin \
-    /usr/lib/jdk1.3.1/bin $GOBINS \
+    /usr/lib/jdk1.3.1/bin $HOME/go/bin \
     $_PATH; do
     myaddpath $path
 done
@@ -187,6 +187,11 @@ function xtitle ()
     *)  ;;
   esac
 }
+
+docker-ip() {
+    boot2docker ip 2> /dev/null
+}
+
 
 # aliases...
 alias top='xtitle Processes on $HOST && top'
