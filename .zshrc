@@ -47,7 +47,7 @@ ZSH_THEME="amuse"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git osx brew)
+plugins=(git osx brew golang)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -98,6 +98,14 @@ fi
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
+# allow corefiles (in /core on OS X)
+limit -s coredumpsize unlimited
+
+# Perforce
+export P4CONFIG=p4config.txt
+export P4USER=olan
+export P4PASSWD=05f35b6bad
+
 # ssh
 export SSH_KEY_PATH="~/.ssh/dsa_id"
 
@@ -108,9 +116,17 @@ export SSH_KEY_PATH="~/.ssh/dsa_id"
 #
 alias destruct='ssh-add -D'
 alias verify='ssh-add ~/.ssh/id_dsa'
+alias vi='/usr/local/bin/vim'
+alias vim='/usr/local/bin/vim'
 
 ulimit -c 0 # Remove this if you like core files :)
 set -o vi
+
+# copies p4 passwd to clipboard
+p4pass() {
+    env | grep -i p4pass | awk -F= '{ print $2  }' | pbcopy
+    echo "perforce password copied to pasteboard"
+}
 
 docker-ip() {
     boot2docker ip 2> /dev/null
