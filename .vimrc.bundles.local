@@ -1,5 +1,1 @@
-Bundle 'nsf/gocode'
-Bundle 'fatih/vim-go'
-# Doesn't seem to work
 Bundle 'mattn/emoji-vim'
-let g:spf13_bundle_groups=['general', 'writing', 'neocomplcache', 'programming', 'ruby', 'python', 'javascript', 'html', 'misc', 'go']
