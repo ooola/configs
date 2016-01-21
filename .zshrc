@@ -77,7 +77,8 @@ _PATH="$PATH"; PATH=
 NP=
 [ -e /usr/local/bin/go ] && GOBINS="$(/usr/local/bin/go env GOROOT)/bin"
 for path in $HOME/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin \
-for path in /Users/ola/bin /usr/local/bin /usr/bin /bin /usr/sbin /sbin \
+    /Users/ola/bin /usr/local/bin /usr/bin /bin /usr/sbin /sbin \
+    /usr/local/texlive/2015/bin/x86_64-darwin \
     /usr/local/opt/go/bin $HOME/go/bin $GOBINS /opt/X11/bin $_PATH; do
     [ -d $path ] && NP="$NP:$path"
 done
@@ -104,7 +105,7 @@ limit -s coredumpsize unlimited
 # Perforce
 export P4CONFIG=p4config.txt
 export P4USER=olan
-export P4PASSWD=05f35b6bad
+export P4PASSWD=SrZ6KUzhuA
 
 # ssh
 export SSH_KEY_PATH="~/.ssh/dsa_id"
@@ -117,7 +118,7 @@ export SSH_KEY_PATH="~/.ssh/dsa_id"
 alias destruct='ssh-add -D'
 alias verify='ssh-add ~/.ssh/id_dsa'
 alias vi='/usr/local/bin/vim'
-alias vim='/usr/local/bin/vim'
+alias vi='/usr/local/bin/vim'
 
 ulimit -c 0 # Remove this if you like core files :)
 set -o vi
