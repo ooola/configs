@@ -1,1 +1,2 @@
 Bundle 'mattn/emoji-vim'
+Bundle 'vim-airline/vim-airline-themes'
