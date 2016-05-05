@@ -1,3 +1,4 @@
+source /Users/onordstrom/workspace/optimizely/.source_this.sh
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -77,9 +78,9 @@ _PATH="$PATH"; PATH=
 NP=
 [ -e /usr/local/bin/go ] && GOBINS="$(/usr/local/bin/go env GOROOT)/bin"
 for path in $HOME/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin \
-    /Users/ola/bin /usr/local/bin /usr/bin /bin /usr/sbin /sbin \
+    /usr/local/bin /usr/bin /bin /usr/sbin /sbin \
     /usr/local/texlive/2015/bin/x86_64-darwin \
-    /Users/ola/Library/Android/sdk/platform-tools \
+    $HOME/Library/Android/sdk/platform-tools $HOME/tools/arcanist/bin \
     /usr/local/opt/go/bin $HOME/go/bin $GOBINS /opt/X11/bin $_PATH; do
     [ -d $path ] && NP="$NP:$path"
 done
@@ -112,7 +113,7 @@ export SSH_KEY_PATH="~/.ssh/dsa_id"
 # For a full list of active aliases, run `alias`.
 #
 alias destruct='ssh-add -D'
-alias verify='ssh-add ~/.ssh/id_dsa'
+alias verify='ssh-add ~/.ssh/id_rsa'
 alias vi='/usr/local/bin/vim'
 alias vi='/usr/local/bin/vim'
 
@@ -126,7 +127,7 @@ p4pass() {
 }
 
 docker-ip() {
-    boot2docker ip 2> /dev/null
+    docker-machine ip 2> /dev/null
 }
 
 function getrands()
@@ -191,4 +192,14 @@ ipaddr()
   ifconfig $INTERFACE | grep 'inet ' | awk '{print $2}'
 }
 
+export NVM_DIR="/Users/onordstrom/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
+# Optimizely env sourced from ~/.bash_profile
+source $HOME/workspace/optimizely/.source_this.sh
+# The next line updates PATH for the Google Cloud SDK.
+source $HOME/.google-cloud-sdk/path.zsh.inc
+# The next line enables shell command completion for gcloud.
+source $HOME/.google-cloud-sdk/completion.zsh.inc
+# Source arc bash completions
+source $HOME/tools/arcanist/resources/shell/bash-completion
