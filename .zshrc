@@ -79,6 +79,7 @@ NP=
 for path in $HOME/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin \
     /Users/ola/bin /usr/local/bin /usr/bin /bin /usr/sbin /sbin \
     /usr/local/texlive/2015/bin/x86_64-darwin \
+    /Users/ola/Library/Android/sdk/platform-tools \
     /usr/local/opt/go/bin $HOME/go/bin $GOBINS /opt/X11/bin $_PATH; do
     [ -d $path ] && NP="$NP:$path"
 done
@@ -101,11 +102,6 @@ fi
 
 # allow corefiles (in /core on OS X)
 limit -s coredumpsize unlimited
-
-# Perforce
-export P4CONFIG=p4config.txt
-export P4USER=olan
-export P4PASSWD=SrZ6KUzhuA
 
 # ssh
 export SSH_KEY_PATH="~/.ssh/dsa_id"
