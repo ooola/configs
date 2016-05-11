@@ -48,7 +48,7 @@ ZSH_THEME="amuse"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git osx brew golang)
+plugins=(git osx brew golang docker)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -78,6 +78,7 @@ _PATH="$PATH"; PATH=
 NP=
 [ -e /usr/local/bin/go ] && GOBINS="$(/usr/local/bin/go env GOROOT)/bin"
 for path in $HOME/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin \
+    $HOME/workspace/optimizely/out/node-0.10.40/out/bin \
     /usr/local/bin /usr/bin /bin /usr/sbin /sbin \
     /usr/local/texlive/2015/bin/x86_64-darwin \
     $HOME/Library/Android/sdk/platform-tools $HOME/tools/arcanist/bin \
@@ -128,6 +129,10 @@ p4pass() {
 
 docker-ip() {
     docker-machine ip 2> /dev/null
+}
+
+envdocker() {
+    eval $(docker-machine env default)
 }
 
 function getrands()
