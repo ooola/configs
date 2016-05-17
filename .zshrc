@@ -140,6 +140,10 @@ function getrands()
     for i in {1..5};do od -vAn -N4 -tu4 < /dev/urandom; done
 }
 
+showpem() {
+    openssl x509 -inform PEM -noout -text -in $1
+}
+
 # swap 2 filenames
 function swap()
 {
