@@ -76,13 +76,13 @@ fi
 _IFS="$IFS"; IFS=:
 _PATH="$PATH"; PATH=
 NP=
-[ -e /usr/local/bin/go ] && GOBINS="$(/usr/local/bin/go env GOROOT)/bin"
+[ -e /usr/local/bin/go ] && export GOBIN="$(/usr/local/bin/go env GOROOT)/bin"
 for path in $HOME/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin \
     $HOME/workspace/optimizely/out/node-0.10.40/out/bin \
     /usr/local/bin /usr/bin /bin /usr/sbin /sbin \
     /usr/local/texlive/2015/bin/x86_64-darwin \
     $HOME/Library/Android/sdk/platform-tools $HOME/tools/arcanist/bin \
-    /usr/local/opt/go/bin $HOME/go/bin $GOBINS /opt/X11/bin $_PATH; do
+    /usr/local/opt/go/bin $HOME/go/bin $GOBIN /opt/X11/bin $_PATH; do
     [ -d $path ] && NP="$NP:$path"
 done
 PATH=$NP; unset _NP

@@ -1,4 +1,10 @@
-NerdTree Cheetsheet
+Vim Notes
+=========
+
+# spf13
+Uses Vundle plugin manager and enables fatih/vim-go if golang is enabled.
+
+# NerdTree Cheetsheet
 
 Nerd Tree plugin can be activated by the :NERDTree vim command. To close the plugin execute the :NERDTreeClose command.
 
