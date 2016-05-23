@@ -3,6 +3,17 @@ Vim Notes
 
 # spf13
 Uses Vundle plugin manager and enables fatih/vim-go if golang is enabled.
+To install bundles in vim do ":BundleInstall" and all bundles selected
+~/.vimrc.before.local and ~/.vimrc/bundles.local will be installed.
+
+# Golang
+fatih/vim-go says to run :GoInstallBinaries after it is enable (see above).
+
+# Neocomplete
+Require vim to be built with lua support.
+
+# TagBar
+Leader (in my case ,) tt will toggle the tag bar.
 
 # NerdTree Cheetsheet
 
