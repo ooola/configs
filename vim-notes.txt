@@ -10,7 +10,9 @@ old settings are loaded from
 .vimundo
 .vimviews
 
-Delete all the file in this directory. For more see https://github.com/spf13/spf13-vim/issues/88
+To fix do.
+
+    rm -rf ~/.vimbackup/* && rm -rf ~/.vimswap/* && rm -rf ~/.vimundo/* && rm -rf ~/.vimviews/*
 
 # spf13
 Uses Vundle plugin manager and enables fatih/vim-go if golang is enabled.
