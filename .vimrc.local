@@ -73,7 +73,7 @@ nmap <F8> :TagbarToggle<CR>
 
 " web editing settings
 autocmd Filetype html set tabstop=2 shiftwidth=2 softtabstop=2
-
+autocmd Filetype javascript set tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype python set tabstop=2 shiftwidth=2 softtabstop=2 tw=120
 
 let NERDTreeQuitOnOpen = 0
