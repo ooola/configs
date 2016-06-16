@@ -135,6 +135,10 @@ envdocker() {
     eval $(docker-machine env default)
 }
 
+datawarehouse() {
+    psql -h prd.dw.optimizely.com -d dw -U onordstrom
+}
+
 function getrands()
 {
     for i in {1..5};do od -vAn -N4 -tu4 < /dev/urandom; done
