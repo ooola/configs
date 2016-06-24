@@ -116,7 +116,7 @@ export SSH_KEY_PATH="~/.ssh/dsa_id"
 alias destruct='ssh-add -D'
 alias verify='ssh-add ~/.ssh/id_rsa'
 alias vi='/usr/local/bin/vim'
-alias vi='/usr/local/bin/vim'
+alias aws='/usr/local/bin/aws' # the AWS in optimizely is old and needs to die
 
 ulimit -c 0 # Remove this if you like core files :)
 set -o vi
