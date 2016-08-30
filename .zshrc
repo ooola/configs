@@ -78,6 +78,7 @@ _PATH="$PATH"; PATH=
 NP=
 [ -e /usr/local/bin/go ] && export GOBIN="$(/usr/local/bin/go env GOROOT)/bin"
 for path in $HOME/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin \
+    /Applications/calibre.app/Contents/console.app/Contents/MacOS \
     $HOME/workspace/optimizely/out/node-0.10.40/out/bin \
     /usr/local/bin /usr/bin /bin /usr/sbin /sbin \
     /usr/local/texlive/2015/bin/x86_64-darwin \
@@ -129,6 +130,11 @@ p4pass() {
 
 docker-ip() {
     docker-machine ip 2> /dev/null
+}
+
+clean-docker() {
+    docker rm -v $(docker ps -a -q -f status=exited)
+    docker rmi $(docker images -f "dangling=true" -q)
 }
 
 envdocker() {
