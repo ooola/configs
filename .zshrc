@@ -145,6 +145,10 @@ datawarehouse() {
     psql -h prd.dw.optimizely.com -d dw -U onordstrom
 }
 
+oladiff() {
+    diff --side-by-side $1 $2 | colordiff
+}
+
 function getrands()
 {
     for i in {1..5};do od -vAn -N4 -tu4 < /dev/urandom; done
