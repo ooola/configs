@@ -22,7 +22,7 @@ source $ZSH/oh-my-zsh.sh
 ##########################################
 # Optimizely hrd necessary configuration #
 ##########################################
-source /Users/onordstrom/workspace/optimizely/.source_this.sh
+
 export NVM_DIR="/Users/onordstrom/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
@@ -88,6 +88,7 @@ _PATH="$PATH"; PATH=
 NP=
 [ -e /usr/local/bin/go ] && export GOBIN="$(/usr/local/bin/go env GOROOT)/bin"
 for path in $HOME/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin \
+    $HOME/.rvm/bin \
     /Applications/calibre.app/Contents/console.app/Contents/MacOS \
     $HOME/workspace/optimizely/out/node-0.10.40/out/bin \
     /usr/local/bin /usr/bin /bin /usr/sbin /sbin \
