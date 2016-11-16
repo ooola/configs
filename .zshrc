@@ -15,7 +15,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(git osx brew golang docker aws gpg-agent)
-plugins=(git osx brew golang docker aws)
+plugins=(git osx golang docker aws)
 
 source $ZSH/oh-my-zsh.sh
 
