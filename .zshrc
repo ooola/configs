@@ -19,32 +19,6 @@ plugins=(git osx golang docker aws)
 
 source $ZSH/oh-my-zsh.sh
 
-##########################################
-# Optimizely hrd necessary configuration #
-##########################################
-
-export NVM_DIR="/Users/onordstrom/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-# Optimizely env sourced from ~/.bash_profile
-source $HOME/workspace/optimizely/.source_this.sh
-# The next line updates PATH for the Google Cloud SDK.
-source $HOME/.google-cloud-sdk/path.zsh.inc
-# The next line enables shell command completion for gcloud.
-source $HOME/.google-cloud-sdk/completion.zsh.inc
-# Source arc bash completions
-source $HOME/tools/arcanist/resources/shell/bash-completion
-##########################################
-# End Optimizely hrd configuration       #
-##########################################
-
-# Local CPAN
-PATH="/Users/onordstrom/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/Users/onordstrom/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/Users/onordstrom/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/Users/onordstrom/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/Users/onordstrom/perl5"; export PERL_MM_OPT;
-
 USE_GPG_AGENT=false
 
 # Yubikey GPG settings
@@ -102,6 +76,33 @@ export PATH; unset _PATH
 IFS=$_IFS; unset _IFS
 
 export GOPATH=$HOME/go
+
+# Local CPAN
+PATH="/Users/onordstrom/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/Users/onordstrom/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/Users/onordstrom/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/Users/onordstrom/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/onordstrom/perl5"; export PERL_MM_OPT;
+
+############################################################################
+# Optimizely hrd necessary configuration must happen after cleaned up path #
+############################################################################
+
+export NVM_DIR="/Users/onordstrom/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# Optimizely env sourced from ~/.bash_profile
+source $HOME/workspace/optimizely/.source_this.sh
+# The next line updates PATH for the Google Cloud SDK.
+source $HOME/.google-cloud-sdk/path.zsh.inc
+# The next line enables shell command completion for gcloud.
+source $HOME/.google-cloud-sdk/completion.zsh.inc
+# Source arc bash completions
+source $HOME/tools/arcanist/resources/shell/bash-completion
+############################################################################
+# End Optimizely hrd configuration                                         #
+############################################################################
+
 ### End PATH
 
 #Preferred editor for local and remote sessions
