@@ -3,7 +3,7 @@ export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
-ZSH_THEME="amuse"
+ZSH_THEME="dallas"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
