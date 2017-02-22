@@ -68,6 +68,7 @@ for path in $HOME/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin \
     /usr/local/bin /usr/bin /bin /usr/sbin /sbin \
     /usr/local/texlive/2015/bin/x86_64-darwin \
     $HOME/Library/Android/sdk/platform-tools $HOME/tools/arcanist/bin \
+    $HOME/workspace/primordia/bin \
     /usr/local/opt/go/bin $HOME/go/bin $GOBIN /opt/X11/bin $_PATH; do
     [ -d $path ] && NP="$NP:$path"
 done
