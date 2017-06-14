@@ -162,6 +162,11 @@ function getrands()
     for i in {1..5};do od -vAn -N4 -tu4 < /dev/urandom; done
 }
 
+function randompass()
+{
+    cat /dev/urandom | env LC_CTYPE=C tr -dc "a-zA-Z0-9-_\$\?" | head -c 16; echo
+}
+
 showpem() {
     openssl x509 -inform PEM -noout -text -in $1
 }
