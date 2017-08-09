@@ -1,7 +1,8 @@
 Vim Notes
 =========
 
-# Settings don't take affect
+## Settings don't take affect
+
 Sometimes when change settings, e.g. indentation they don't take affect because
 old settings are loaded from
 
@@ -14,21 +15,16 @@ To fix do.
 
     rm -rf ~/.vimbackup/* && rm -rf ~/.vimswap/* && rm -rf ~/.vimundo/* && rm -rf ~/.vimviews/*
 
-# spf13
-Uses Vundle plugin manager and enables fatih/vim-go if golang is enabled.
-To install bundles in vim do ":BundleInstall" and all bundles selected
-~/.vimrc.before.local and ~/.vimrc/bundles.local will be installed.
-
-# Golang
+## Golang
 fatih/vim-go says to run :GoInstallBinaries after it is enable (see above).
 
-# Neocomplete
+## Neocomplete
 Require vim to be built with lua support.
 
-# TagBar
-Leader (in my case ,) tt will toggle the tag bar.
+## TagBar
+Pressin "F8" will toggle the TagBar
 
-# NerdTree Cheetsheet
+## NerdTree Cheetsheet
 
 Nerd Tree plugin can be activated by the :NERDTree vim command. To close the plugin execute the :NERDTreeClose command.
 

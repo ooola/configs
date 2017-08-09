@@ -70,6 +70,8 @@ map <silent>,j <C-w>j
 map <silent>,k <C-w>k
 map <silent>,l <C-w>l
 
+" set leader from \ (default) to ,
+let mapleader = ","
 " Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
