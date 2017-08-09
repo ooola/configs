@@ -1,86 +1,129 @@
-colorscheme desert
+" Plugins will be downloaded under the specified directory.
+call plug#begin('~/.vim/plugged')
+
+" General
+Plug 'Shougo/neocomplete.vim'
+if executable('ctags')
+    Plug 'majutsushi/tagbar'
+endif
+nmap <F8> :TagbarToggle<CR>
+Plug 'flazz/vim-colorschemes'
+Plug 'bling/vim-airline'
+Plug 'mattn/emoji-vim'
+Plug 'docker/docker'
+
+" Go
+Plug 'fatih/vim-go'
+Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+
+" C and CPP
+" todo
+
+" On-demand loading
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+
+" Python
+Plug 'klen/python-mode'
+Plug 'yssource/python.vim'
+
+" HTML
+Plug 'hail2u/vim-css3-syntax'
+Plug 'gorodinskiy/vim-coloresque'
+Plug 'tpope/vim-haml'
+Plug 'mattn/emmet-vim'
+
+" Javascript
+Plug 'elzr/vim-json'
+Plug 'groenewege/vim-less'
+Plug 'pangloss/vim-javascript'
+Plug 'briancollins/vim-jst'
+Plug 'kchmck/vim-coffee-script'
+
+call plug#end()
+
+colorscheme ir_black
+set guioptions+=T               "turn on the toolbar
+set guifont=Source\ Code\ Pro:h12
+set t_Co=256                    "SApprox skipped; terminal only has 8 colors, not 88/256 in
+set wrap
+set clipboard=unnamed
+set nocursorline                "slows down redrawing
+set nofoldenable
+set shell=/bin/sh
 set nohlsearch
 set nocompatible
 set backupcopy=no
 set backupdir=~/tmp/
-set visualbell
-
-if has("win32") || has("win64")
-    set fileformat=dos
-    set shell=powershell.exe
-    set shellcmdflag=/C
-endif
-
-if has('gui_running')
-    set guifont=Monospace\ 12
-endif
-
-" map <F5> :s.^//.. <CR> :noh <CR>
-" map <F6> :s.^.//. <CR> :noh <CR>
-" Now you use a visual line select (shift-V) to select what you want to comment,
-" smack F5 and it's done. F6 uncomments.
-" 
-" As a bonus, use these to change indents. Change "indent" to your preference for indenting.
-" I use 4 spaces. Use \t if you want a tab. Combined with shift-V, you can move whole blocks
-" left and right easily.
-" map <F7> :s/^indent// <CR> :noh <CR> gv
-" map <F8> :s/^/indent/ <CR> :noh <CR> gv
-" 
-" the location of the tags file is the same in both MPS and client trees
-" set tags=\src\tags,\src\gfx\tags
 
 syntax on
-"filetype on
-"filetype plugin on
-"filetype indent on      
-filetype plugin indent on  " This actually turns on ft detection, plugin and indent
-"                          So previous commands were redundant. See :filetype
-autocmd Filetype go set makeprg=go\ build
-"autocmd Filetype go set tabstop=8 shiftwidth=8 noexpandtab
-autocmd FileType c,cpp :set cindent 
-autocmd BufRead *.py highlight BadWhitespace ctermbg=red guibg=red
-autocmd BufRead *.py match BadWhitespace /^\t\+/
-autocmd BufRead *.py match BadWhitespace /\s\+$/
+filetype plugin indent on
 
-" enable omni completion
-set ofu=syntaxcomplete#Complete
+" disable the error bell in terminal and GUI
+set noerrorbells visualbell t_vb=
+if has('autocmd')
+  autocmd GUIEnter * set visualbell t_vb=
+endif
 
-"set list listchars=tab:?·,trail:·,nbsp:·
-set statusline=%F%m%r%h%w\ [TYPE=%Y\ %{&ff}]\
-\ [%l/%L\ (%p%%)
-
-au FileType py set autoindent " not sure if this is needed
-au FileType py set smartindent " not sure if needed
-au FileType py set textwidth=79 " PEP-8 Friendly
-
-" See http://justinlilly.com/vim/vim_and_python.html
-
-au BufRead *.txt set textwidth=79
-au BufRead *.txt setlocal spell spelllang=en_us 
-au BufRead *.txt set tabstop=4 shiftwidth=4 expandtab ruler
-
-" NERD_tree config
-let NERDTreeChDirMode=2
-let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$', '\.swp$']
-let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\~$']
-let NERDTreeShowBookmarks=1
-map <F3> :NERDTreeToggle<CR>
-
-" Syntax for multiple tag files are
-" set tags=/my/dir1/tags, /my/dir2/tags
-set tags=tags;$HOME/.vim/tags/
-
-" TagList Plugin Configuration
-let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
-let Tlist_GainFocus_On_ToggleOpen = 1
-let Tlist_Close_On_Select = 1
-let Tlist_Use_Right_Window = 1
-let Tlist_File_Fold_Auto_Close = 1
-map <F7> :TlistToggle<CR>
-
-" Viewport Controls
-" ie moving between split panes
+" Viewport Controls - moving between split panes
 map <silent>,h <C-w>h
 map <silent>,j <C-w>j
 map <silent>,k <C-w>k
 map <silent>,l <C-w>l
+
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+
+let NERDTreeQuitOnOpen = 0
+
+autocmd Filetype go set makeprg=go\ build
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+autocmd FileType c,cpp :set cindent
+autocmd Filetype html set tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype javascript set tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype python set tabstop=2 shiftwidth=2 softtabstop=2 tw=120
+autocmd Filetype make set tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab tw=80
+autocmd	BufRead *.txt set textwidth=79
+autocmd BufRead *.txt setlocal spell spelllang=en_us
+autocmd BufRead *.txt set tabstop=4 shiftwidth=4 expandtab ruler
+
+" When opening temporary files create the directory if it doesn't exist
+function s:MkNonExDir(file, buf)
+    if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+        let dir=fnamemodify(a:file, ':h')
+        if !isdirectory(dir)
+            call mkdir(dir, 'p')
+        endif
+    endif
+endfunction
+augroup BWCCreateDir
+    autocmd!
+    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+augroup END
