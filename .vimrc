@@ -17,7 +17,7 @@ Plug 'fatih/vim-go'
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 
 " C and CPP
-" todo
+Plug 'vim-scripts/c.vim'
 
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -38,6 +38,9 @@ Plug 'groenewege/vim-less'
 Plug 'pangloss/vim-javascript'
 Plug 'briancollins/vim-jst'
 Plug 'kchmck/vim-coffee-script'
+
+" Markdown
+Plug 'plasticboy/vim-markdown'
 
 call plug#end()
 
@@ -111,6 +114,7 @@ autocmd FileType c,cpp :set cindent
 autocmd Filetype html set tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype javascript set tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype python set tabstop=2 shiftwidth=2 softtabstop=2 tw=120
+autocmd Filetype markdown set tabstop=4 shiftwidth=4 softtabstop=4 tw=120
 autocmd Filetype make set tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab tw=80
 autocmd	BufRead *.txt set textwidth=79
 autocmd BufRead *.txt setlocal spell spelllang=en_us
