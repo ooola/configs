@@ -113,16 +113,14 @@ let g:tagbar_type_go = {
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
 \ }
-autocmd FileType c,cpp setlocal cindent
-autocmd Filetype html setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Filetype python setlocal tabstop=2 shiftwidth=2 softtabstop=2 tw=120
+autocmd FileType c,cpp setlocal cindent tabstop=4 shiftwidth=4 softtabstop=4 expandtab tw=80
+autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2
+autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2
+autocmd Filetype python setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab tw=120
 autocmd Filetype yaml setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab tw=80
-autocmd Filetype markdown setlocal tabstop=4 shiftwidth=4 softtabstop=4 tw=120
+autocmd Filetype markdown setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab tw=120
 autocmd Filetype make setlocal tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab tw=80
-autocmd	BufRead *.txt setlocal textwidth=79
-autocmd BufRead *.txt setlocal spell spelllang=en_us
-autocmd BufRead *.txt setlocal tabstop=4 shiftwidth=4 expandtab ruler
+autocmd	Filetype text setlocal tabstop=4 shiftwidth=4 expandtab ruler spell spelllang=en_us tw=80
 
 " When opening temporary files create the directory if it doesn't exist
 function s:MkNonExDir(file, buf)
