@@ -36,3 +36,8 @@ Press s to open the file in a new vertical split.
 Press p to go to parent directory.
 Press r to refresh the current directory.
 Press m to launch NERDTree menu inside vim.
+
+## Spelling
+
+zg - to add highlighted word
+CTRL-P to autocomplete
