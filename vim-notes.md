@@ -41,3 +41,8 @@ Press m to launch NERDTree menu inside vim.
 
 zg - to add highlighted word
 CTRL-P to autocomplete
+
+## Navigation
+
+CTRL-] - jump to function definition
+CTRL-o - jump to older (previous) place
