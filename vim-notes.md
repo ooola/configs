@@ -46,3 +46,12 @@ CTRL-P to autocomplete
 
 CTRL-] - jump to function definition
 CTRL-o - jump to older (previous) place
+
+In nerdtree
+
+,m - bring up menu
+mr - open reveal in finder
+
+CTRLP - ?
+Fugitive - git blame via :Gblame then do 'o' to view that commit, :Gdiff
+
