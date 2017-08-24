@@ -52,6 +52,9 @@ set guioptions+=T               "turn on the toolbar
 set guifont=Source\ Code\ Pro:h12
 set t_Co=256                    "SApprox skipped; terminal only has 8 colors, not 88/256 in
 set wrap
+if $TMUX == '' " setting clipboard in tmux gives Nothing in register * when pasting
+    set clipboard+=unnamed
+endif
 set clipboard=unnamed
 set nocursorline                "slows down redrawing
 set nofoldenable
