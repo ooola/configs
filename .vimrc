@@ -63,6 +63,7 @@ set nohlsearch
 set nocompatible
 set backupcopy=no
 set backupdir=~/tmp/
+set conceallevel=0              "otherwise silly vim-json hides quotes by default
 
 syntax on
 filetype plugin indent on
@@ -119,6 +120,7 @@ let g:tagbar_type_go = {
 autocmd FileType c,cpp setlocal cindent tabstop=4 shiftwidth=4 softtabstop=4 expandtab tw=80
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2
+autocmd Filetype json setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2
 autocmd Filetype python setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab tw=120
 autocmd Filetype yaml setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab tw=80
 autocmd Filetype markdown setlocal tabstop=4 shiftwidth=4 softtabstop=4 spell expandtab tw=120
