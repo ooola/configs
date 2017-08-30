@@ -80,6 +80,8 @@ map <silent>,j <C-w>j
 map <silent>,k <C-w>k
 map <silent>,l <C-w>l
 
+nmap <F6> :NERDTreeToggle<CR>
+
 " set leader from \ (default) to ,
 let mapleader = ","
 " Use neocomplete.
