@@ -1,8 +1,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
+# Set name of the theme to load. Look in ~/.oh-my-zsh/themes/
 ZSH_THEME="dallas"
 
 # Uncomment the following line if you want to change the command execution time
@@ -15,7 +14,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(git osx brew golang docker aws gpg-agent)
-plugins=(git osx golang docker aws)
+plugins=(git osx golang docker aws virtualenvwrapper)
 
 source $ZSH/oh-my-zsh.sh
 
