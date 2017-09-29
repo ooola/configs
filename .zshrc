@@ -63,11 +63,9 @@ NP=
 for path in $HOME/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin \
     $HOME/.rvm/bin \
     /Applications/calibre.app/Contents/console.app/Contents/MacOS \
-    $HOME/workspace/optimizely/out/node-0.10.40/out/bin \
     /usr/local/bin /usr/bin /bin /usr/sbin /sbin \
     /usr/local/texlive/2015/bin/x86_64-darwin \
     $HOME/Library/Android/sdk/platform-tools $HOME/tools/arcanist/bin \
-    $HOME/workspace/primordia/bin \
     /usr/local/opt/go/bin $HOME/go/bin $GOBIN /opt/X11/bin $_PATH; do
     [ -d $path ] && NP="$NP:$path"
 done
@@ -83,27 +81,6 @@ PERL5LIB="/Users/onordstrom/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PE
 PERL_LOCAL_LIB_ROOT="/Users/onordstrom/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/Users/onordstrom/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/Users/onordstrom/perl5"; export PERL_MM_OPT;
-
-############################################################################
-# Optimizely hrd necessary configuration must happen after cleaned up path #
-############################################################################
-
-export NVM_DIR="/Users/onordstrom/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-# Optimizely env sourced from ~/.bash_profile
-source $HOME/workspace/optimizely/.source_this.sh
-# The next line updates PATH for the Google Cloud SDK.
-source $HOME/.google-cloud-sdk/path.zsh.inc
-# The next line enables shell command completion for gcloud.
-source $HOME/.google-cloud-sdk/completion.zsh.inc
-# Source arc bash completions
-source $HOME/tools/arcanist/resources/shell/bash-completion
-############################################################################
-# End Optimizely hrd configuration                                         #
-############################################################################
-
-### End PATH
 
 export EDITOR='vim'
 
@@ -170,6 +147,7 @@ showpem() {
     openssl x509 -inform PEM -noout -text -in $1
 }
 
+
 # swap 2 filenames
 function swap()
 {
@@ -226,3 +204,43 @@ ipaddr()
   fi
   ifconfig $INTERFACE | grep 'inet ' | awk '{print $2}'
 }
+
+############################################################################
+# Optimizely hrd necessary configuration must happen after cleaned up path #
+############################################################################
+function enable_optimizely () 
+{
+  source /Users/onordstrom/workspace/primordia/.source_this.sh
+
+  export NVM_DIR="/Users/onordstrom/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+  source $HOME/workspace/optimizely/.source_this.sh
+  source $HOME/.google-cloud-sdk/path.zsh.inc
+  source $HOME/.google-cloud-sdk/completion.zsh.inc
+  source $HOME/tools/arcanist/resources/shell/bash-completion
+
+  export PATH=$HOME/workspace/primordia/bin:$PATH
+  export PATH=$HOME/workspace/optimizely/out/node-0.10.40/out/bin:$PATH
+}
+############################################################################
+# End Optimizely hrd configuration                                         #
+############################################################################
+
+############################################################################
+# Experiment Engine configuration                                          #
+############################################################################
+function enable_ee () {
+
+  export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
+  export WORKON_HOME=$HOME/.virtualenvs
+
+  # no necessary since zsh has virtualenvwrapper enabled already
+  #source /usr/local/bin/virtualenvwrapper.sh
+
+  # autoenv
+  source $(brew --prefix autoenv)/activate.sh
+}
+############################################################################
+# Experiment Engine configuration                                          #
+############################################################################
