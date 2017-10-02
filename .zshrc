@@ -36,15 +36,20 @@ fi
 
 # Prompt
 setopt PROMPT_SUBST
+function printDevEnvironment {
+  if [[ "$DEV_ENVIRONMENT" != "" ]]; then
+    echo %{$fg[red]%}\($DEV_ENVIRONMENT\) %{$reset_color%}
+  fi
+}
 function printKeyStatus {
-    if [ "$USE_GPG_AGENT" = true ]; then
-        echo %{$fg[yellow]%} \(YubiKey\)%{$reset_color%}
-    else
-        [ "$(ssh-add -l)" = "The agent has no identities." ] || echo %{$fg[blue]%}\(KEYS\)%{$reset_color%}
-    fi
+  if [ "$USE_GPG_AGENT" = true ]; then
+    echo %{$fg[yellow]%} \(YubiKey\)%{$reset_color%}
+  else
+    [ "$(ssh-add -l)" = "The agent has no identities." ] || echo %{$fg[blue]%}\(KEYS\)%{$reset_color%}
+  fi
 }
 PROMPT='
-%{$fg[magenta]%}%n%{$reset_color%}%{$fg[green]%}@%{$reset_color%}%{$fg[yellow]%}%m%{$reset_color%}[in]%{$fg_bold[green]%}${PWD/#$HOME/~}%{$reset_color%}[$(git_prompt_info)]⌚ %{$fg_bold[red]%}%*%{$reset_color%}$(printKeyStatus)
+$(printDevEnvironment)%{$fg[magenta]%}%n%{$reset_color%}%{$fg[green]%}@%{$reset_color%}%{$fg[yellow]%}%m%{$reset_color%}[in]%{$fg_bold[green]%}${PWD/#$HOME/~}%{$reset_color%}[$(git_prompt_info)]⌚ %{$fg_bold[red]%}%*%{$reset_color%}$(printKeyStatus)
 $ '
 # End Prompt
 
@@ -84,20 +89,12 @@ PERL_MM_OPT="INSTALL_BASE=/Users/onordstrom/perl5"; export PERL_MM_OPT;
 
 export EDITOR='vim'
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
 # allow corefiles (in /core on OS X)
 limit -s coredumpsize unlimited
 
-# ssh
 export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
 alias destruct='ssh-add -D'
 alias verify='ssh-add ~/.ssh/id_rsa'
 alias vi='/usr/local/bin/vim'
@@ -106,30 +103,20 @@ alias aws='/usr/local/bin/aws' # the AWS in optimizely is old and needs to die
 ulimit -c 0 # Remove this if you like core files :)
 set -o vi
 
-# copies p4 passwd to clipboard
-p4pass() {
-    env | grep -i p4pass | awk -F= '{ print $2  }' | pbcopy
-    echo "perforce password copied to pasteboard"
-}
+############################################################################
+# Miscellaneous functions                                                  #
+############################################################################
 
-docker-ip() {
-    docker-machine ip 2> /dev/null
-}
-
-clean-docker() {
+function clean-docker() {
     docker rm -v $(docker ps -a -q -f status=exited)
     docker rmi $(docker images -f "dangling=true" -q)
 }
 
-envdocker() {
-    eval $(docker-machine env default)
-}
-
-datawarehouse() {
+function datawarehouse() {
     psql -h prd.dw.optimizely.com -d dw -U onordstrom
 }
 
-oladiff() {
+function oladiff() {
     diff --side-by-side $1 $2 | colordiff
 }
 
@@ -143,13 +130,11 @@ function randompass()
     cat /dev/urandom | env LC_CTYPE=C tr -dc "a-zA-Z0-9-_\$\?" | head -c 16; echo
 }
 
-showpem() {
+function showpem() {
     openssl x509 -inform PEM -noout -text -in $1
 }
 
-
-# swap 2 filenames
-function swap()
+function swap() # swap 2 filenames
 {
   local TMPFILE=tmp.$$
   mv $1 $TMPFILE
@@ -159,7 +144,7 @@ function swap()
 
 function ii()   # get current host related info
 {
-  #echo -e "\nYou are logged on ${RED}$HOST"
+  echo -e "\nYou are logged on ${RED}$HOST"
   echo -e "\nYou are logged on \033[1;32m$HOST\033[0m"
   echo -e "\nAdditionnal information:$NC " ; uname -a
   echo -e "\n${RED}Users logged on:$NC " ; w -h
@@ -181,36 +166,23 @@ function repeat()       # repeat n times command
   done
 }
 
-# sync silver and scrape directories
-# TODO switch to zsh
-synccomp()
+function ipaddrs()
 {
-  H=$HOME
-  FILES="$H/.bashrc $H/.vim $H/.vimrc $H/.inputrc"
-  if [ `hostname` = "silver" ]; then
-    rsync -av --delete --force -e "ssh -o ClearAllForwardings=yes" $FILES scrape:.
-  else
-    echo "unknown host"
-  fi
-}
-
-# TODO fix for OS X and Linux (interface names)
-ipaddr()
-{
-  if [ ! $# = 1 ]; then
-    INTERFACE="en0"
-  else
-    INTERFACE="$1"
-  fi
-  ifconfig $INTERFACE | grep 'inet ' | awk '{print $2}'
+  for interface in $(ifconfig | egrep '^[a-z0-9]+\:' | awk -F: '{print $1}'); do
+    ifconfig $interface | grep 'inet ' > /dev/null
+    if [ "$?" -eq 0 ]; then
+      echo -n "$interface --> "
+      ifconfig $interface | grep 'inet ' | awk '{print $2}'
+    fi
+  done
 }
 
 ############################################################################
 # Optimizely hrd necessary configuration must happen after cleaned up path #
 ############################################################################
-function enable_optimizely () 
+function enable-optimizely () 
 {
-  source /Users/onordstrom/workspace/primordia/.source_this.sh
+  source /Users/onordstrom/workspace/optimizely/.source_this.sh
 
   export NVM_DIR="/Users/onordstrom/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -220,8 +192,9 @@ function enable_optimizely ()
   source $HOME/.google-cloud-sdk/completion.zsh.inc
   source $HOME/tools/arcanist/resources/shell/bash-completion
 
-  export PATH=$HOME/workspace/primordia/bin:$PATH
   export PATH=$HOME/workspace/optimizely/out/node-0.10.40/out/bin:$PATH
+  export PATH=$HOME/workspace/primordia/bin:$PATH
+  export DEV_ENVIRONMENT="HRD-Dev"
 }
 ############################################################################
 # End Optimizely hrd configuration                                         #
@@ -230,7 +203,7 @@ function enable_optimizely ()
 ############################################################################
 # Experiment Engine configuration                                          #
 ############################################################################
-function enable_ee () {
+function enable-ee () {
 
   export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
   export WORKON_HOME=$HOME/.virtualenvs
@@ -240,6 +213,7 @@ function enable_ee () {
 
   # autoenv
   source $(brew --prefix autoenv)/activate.sh
+  export DEV_ENVIRONMENT="ExperimentEngine-Dev"
 }
 ############################################################################
 # Experiment Engine configuration                                          #
