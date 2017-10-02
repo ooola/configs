@@ -62,7 +62,8 @@ set shell=/bin/sh
 set nohlsearch
 set nocompatible
 set backupcopy=no
-set backupdir=~/tmp/
+set backupdir=~/tmp
+set directory=~/tmp,/tmp,/var/tmp
 
 syntax on
 filetype plugin indent on
