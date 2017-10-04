@@ -64,6 +64,7 @@ set nocompatible
 set backupcopy=no
 set backupdir=~/tmp
 set directory=~/tmp,/tmp,/var/tmp
+set nofixendofline  "unfortunately some existing code I have to work with doesn't wan endofline set
 
 syntax on
 filetype plugin indent on
@@ -123,7 +124,7 @@ autocmd FileType c,cpp setlocal cindent tabstop=4 shiftwidth=4 softtabstop=4 exp
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2 conceallevel=0
 autocmd Filetype json setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2
-autocmd Filetype python setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab tw=120
+autocmd Filetype python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab tw=120
 autocmd Filetype yaml setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab tw=80
 autocmd Filetype markdown setlocal tabstop=4 shiftwidth=4 softtabstop=4 spell expandtab tw=120
 autocmd Filetype make setlocal tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab tw=80
@@ -143,3 +144,9 @@ augroup BWCCreateDir
     autocmd!
     autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 augroup END
+
+" Tired of seeing "Regenerate rope cache" too slow to be useful
+let g:pymode_rope = 0
+let g:pymode_rope_lookup_project = 0
+let g:pymode_rope_complete_on_dot = 0
+let g:pymode_rope_autoimport = 0
