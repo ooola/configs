@@ -45,6 +45,9 @@ Plug 'plasticboy/vim-markdown'
 " Yaml
 Plug 'chase/vim-ansible-yaml'
 
+" fzf
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 colorscheme ir_black
@@ -91,6 +94,11 @@ let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 
 let NERDTreeQuitOnOpen = 0
+
+" Buffers
+nmap ; :Buffers<CR>
+nmap <Leader>t :Files<CR>
+nmap <Leader>r :Tags<CR>
 
 autocmd Filetype go set makeprg=go\ build
 let g:tagbar_type_go = {
