@@ -58,3 +58,7 @@ Fugitive - git blame via :Gblame then do 'o' to view that commit, :Gdiff
 ## Ack.vim
 
 This adds :Ag to search with ag.
+
+## Buffers
+
+bd - delete buffer
