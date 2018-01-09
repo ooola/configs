@@ -142,9 +142,10 @@ autocmd Filetype markdown setlocal tabstop=4 shiftwidth=4 softtabstop=4 spell ex
 autocmd Filetype make setlocal tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab tw=80
 autocmd Filetype text setlocal tabstop=4 shiftwidth=4 expandtab ruler spell spelllang=en_us tw=80
 autocmd Filetype zsh setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2
+autocmd Filetype sh setlocal tabstop=4 shiftwidth=4 expandtab softtabstop=4
 
 " When opening temporary files create the directory if it doesn't exist
-function s:MkNonExDir(file, buf)
+function! s:MkNonExDir(file, buf)
     if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
         let dir=fnamemodify(a:file, ':h')
         if !isdirectory(dir)
