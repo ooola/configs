@@ -48,6 +48,9 @@ Plug 'chase/vim-ansible-yaml'
 " fzf
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+
+" Git plugin
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 colorscheme ir_black
