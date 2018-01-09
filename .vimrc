@@ -100,8 +100,8 @@ let NERDTreeQuitOnOpen = 0
 
 " Buffers
 nmap ; :Buffers<CR>
-nmap <Leader>t :Files<CR>
-nmap <Leader>r :Tags<CR>
+nmap <Leader>f :Files<CR>
+nmap <Leader>t :Tags<CR>
 
 autocmd Filetype go set makeprg=go\ build
 let g:tagbar_type_go = {
