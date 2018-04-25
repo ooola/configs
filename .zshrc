@@ -14,7 +14,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(git osx brew golang docker aws gpg-agent)
-plugins=(git osx golang docker aws virtualenvwrapper)
+plugins=(git osx golang docker aws)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -60,6 +60,9 @@ if [ -f ~/.zsh_history ]; then
 fi
 ### End History
 
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2
+export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
+
 ### Fix PATH
 _IFS="$IFS"; IFS=:
 _PATH="$PATH"; PATH=
@@ -104,6 +107,7 @@ ulimit -c 0 # Remove this if you like core files :)
 set -o vi
 
 # fzf via Homebrew
+# CTRL-t to launch
 if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
   source /usr/local/opt/fzf/shell/key-bindings.zsh
   source /usr/local/opt/fzf/shell/completion.zsh
@@ -115,17 +119,6 @@ if [ -e ~/.fzf ]; then
   source ~/.fzf/shell/key-bindings.zsh
   source ~/.fzf/shell/completion.zsh
 fi
-
-# fzf + ag configuration
-#if _has fzf && _has ag; then
-#  export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
-#  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-#  export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
-#  export FZF_DEFAULT_OPTS='
-#  --color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108
-#  --color info:108,prompt:109,spinner:108,pointer:168,marker:168
-#  '
-#fi
 
 ############################################################################
 # Miscellaneous functions                                                  #
@@ -206,17 +199,17 @@ function ipaddrs()
 ############################################################################
 function enable-optimizely () 
 {
-  source /Users/onordstrom/workspace/optimizely/.source_this.sh
+  #source /Users/onordstrom/workspace/optimizely/.source_this.sh
 
   export NVM_DIR="/Users/onordstrom/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-  source $HOME/workspace/optimizely/.source_this.sh
+  #source $HOME/workspace/optimizely/.source_this.sh
   source $HOME/.google-cloud-sdk/path.zsh.inc
   source $HOME/.google-cloud-sdk/completion.zsh.inc
   source $HOME/tools/arcanist/resources/shell/bash-completion
 
-  export PATH=$HOME/workspace/optimizely/out/node-0.10.40/out/bin:$PATH
+  export PATH=/usr/local/opt/node@6/bin:$PATH
   export PATH=$HOME/workspace/primordia/bin:$PATH
   export DEV_ENVIRONMENT="HRD-Dev"
 }
@@ -227,13 +220,15 @@ function enable-optimizely ()
 ############################################################################
 # Experiment Engine configuration                                          #
 ############################################################################
+eval "$(pyenv virtualenv-init -)"
 function enable-ee () {
 
   export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
   export WORKON_HOME=$HOME/.virtualenvs
 
   # no necessary since zsh has virtualenvwrapper enabled already
-  #source /usr/local/bin/virtualenvwrapper.sh
+  # Update, necessary since I remove the zsh virtualenv plugin
+  source /usr/local/bin/virtualenvwrapper.sh
 
   # autoenv
   source $(brew --prefix autoenv)/activate.sh
