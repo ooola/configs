@@ -212,6 +212,7 @@ function enable-optimizely ()
 
   export PATH=/usr/local/opt/node@6/bin:$PATH
   export PATH=$HOME/workspace/primordia/bin:$PATH
+  export OPTIMIZELY_HOME=~/workspace/optimizely
   export DEV_ENVIRONMENT="HRD-Dev"
 }
 ############################################################################
@@ -221,7 +222,7 @@ function enable-optimizely ()
 ############################################################################
 # Experiment Engine configuration                                          #
 ############################################################################
-eval "$(pyenv virtualenv-init -)"
+#eval "$(pyenv virtualenv-init -)"
 function enable-ee () {
 
   export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
