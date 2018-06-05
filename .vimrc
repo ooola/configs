@@ -25,6 +25,7 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 " Python
 Plug 'klen/python-mode'
 Plug 'yssource/python.vim'
+Plug 'nvie/vim-flake8'
 
 " HTML
 Plug 'hail2u/vim-css3-syntax'
@@ -103,6 +104,12 @@ nmap ; :Buffers<CR>
 nmap <Leader>f :Files<CR>
 nmap <Leader>t :Tags<CR>
 
+function StyleCheck()
+    if &filetype == 'python' && executable('flake8')
+        call Flake8()
+    endif
+endfunction
+autocmd BufWritePost *.py call StyleCheck() " call flake8 after write for python files
 autocmd Filetype go set makeprg=go\ build
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
