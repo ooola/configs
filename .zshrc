@@ -69,7 +69,7 @@ _PATH="$PATH"; PATH=
 NP=
 [ -e /usr/local/bin/go ] && export GOBIN="$(/usr/local/bin/go env GOROOT)/bin"
 for path in $HOME/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin \
-    $HOME/.rvm/bin \
+    $HOME/.rvm/bin $HOME/google-cloud-sdk/bin \
     /Applications/calibre.app/Contents/console.app/Contents/MacOS \
     /usr/local/bin /usr/bin /bin /usr/sbin /sbin \
     /usr/local/texlive/2015/bin/x86_64-darwin \
@@ -82,14 +82,6 @@ export PATH; unset _PATH
 IFS=$_IFS; unset _IFS
 
 export GOPATH=$HOME/go
-
-# Local CPAN
-PATH="/Users/onordstrom/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/Users/onordstrom/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/Users/onordstrom/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/Users/onordstrom/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/Users/onordstrom/perl5"; export PERL_MM_OPT;
-
 export EDITOR='vim'
 
 # allow corefiles (in /core on OS X)
@@ -200,19 +192,15 @@ function ipaddrs()
 ############################################################################
 function enable-optimizely () 
 {
-  #source /Users/onordstrom/workspace/optimizely/.source_this.sh
-
   export NVM_DIR="/Users/onordstrom/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-  #source $HOME/workspace/optimizely/.source_this.sh
-  source $HOME/.google-cloud-sdk/path.zsh.inc
-  source $HOME/.google-cloud-sdk/completion.zsh.inc
-  source $HOME/tools/arcanist/resources/shell/bash-completion
-
-  export PATH=/usr/local/opt/node@6/bin:$PATH
-  export PATH=$HOME/workspace/primordia/bin:$PATH
+  cd ~/workspace/optimizely
+  eval $(direnv hook bash)
+  #eval $(direnv hook zsh) they say the built in zsh is too old
   export OPTIMIZELY_HOME=~/workspace/optimizely
+  source $HOME/google-cloud-sdk/path.zsh.inc
+  source $HOME/google-cloud-sdk/completion.zsh.inc
+  source .envrc
   export DEV_ENVIRONMENT="HRD-Dev"
 }
 ############################################################################
