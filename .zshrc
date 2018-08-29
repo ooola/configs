@@ -192,8 +192,8 @@ function ipaddrs()
 ############################################################################
 function enable-optimizely () 
 {
-  export NVM_DIR="/Users/onordstrom/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+  . "/usr/local/opt/nvm/nvm.sh"
+  export NVM_DIR="$HOME/.nvm"
   cd ~/workspace/optimizely
   eval $(direnv hook bash)
   #eval $(direnv hook zsh) they say the built in zsh is too old
