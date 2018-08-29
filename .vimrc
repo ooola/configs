@@ -14,7 +14,7 @@ Plug 'docker/docker'
 
 " Go
 Plug 'fatih/vim-go'
-Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 
 " C and CPP
 Plug 'vim-scripts/c.vim'
@@ -109,7 +109,7 @@ function StyleCheck()
         call Flake8()
     endif
 endfunction
-autocmd BufWritePost *.py call StyleCheck() " call flake8 after write for python files
+"autocmd BufWritePost *.py call StyleCheck() " call flake8 after write for python files
 autocmd Filetype go set makeprg=go\ build
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
@@ -144,6 +144,7 @@ autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab softtabsto
 autocmd Filetype json setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2
 autocmd Filetype python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab tw=120
 autocmd BufRead,BufNewFile,BufEnter ~/workspace/optimizely/* setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab tw=120
+autocmd BufRead,BufNewFile,BufEnter ~/workspace/hermes-airflow/* setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab tw=120
 autocmd Filetype yaml setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab tw=80
 autocmd Filetype markdown setlocal tabstop=4 shiftwidth=4 softtabstop=4 spell expandtab tw=120
 autocmd Filetype make setlocal tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab tw=80
