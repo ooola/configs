@@ -83,6 +83,7 @@ IFS=$_IFS; unset _IFS
 
 export GOPATH=$HOME/go
 export EDITOR='vim'
+export LESS="-F -X $LESS" # tells less not to paginate if less than a page
 
 # allow corefiles (in /core on OS X)
 limit -s coredumpsize unlimited
