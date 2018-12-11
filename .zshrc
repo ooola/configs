@@ -193,12 +193,8 @@ function ipaddrs()
 ############################################################################
 function enable-optimizely () 
 {
-  . "/usr/local/opt/nvm/nvm.sh"
-  export NVM_DIR="$HOME/.nvm"
-  cd ~/workspace/optimizely
-  eval $(direnv hook bash)
-  #eval $(direnv hook zsh) they say the built in zsh is too old
-  export OPTIMIZELY_HOME=~/workspace/optimizely
+  export MONOLITH_ROOT=~/workspace/optimizely
+  cd $MONOLITH_ROOT
   source $HOME/google-cloud-sdk/path.zsh.inc
   source $HOME/google-cloud-sdk/completion.zsh.inc
   source .envrc
@@ -228,3 +224,6 @@ function enable-ee () {
 ############################################################################
 # Experiment Engine configuration                                          #
 ############################################################################
+
+eval "$(rbenv init -)" # this is needed for rbenv
+eval "$(direnv hook zsh)" # run direnv so that it'll pickup .envrc files from repos
