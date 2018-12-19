@@ -46,6 +46,9 @@ Plug 'plasticboy/vim-markdown'
 " Yaml
 Plug 'chase/vim-ansible-yaml'
 
+" Terraform
+Plug 'hashivim/vim-terraform'
+
 " fzf
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
