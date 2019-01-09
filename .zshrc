@@ -145,6 +145,11 @@ function showpem() {
     openssl x509 -inform PEM -noout -text -in $1
 }
 
+function random16ByteKey() {
+    # generate 16 randmob bytes Base64-encoded in a string
+    openssl rand -base64 16
+}
+
 function swap() # swap 2 filenames
 {
   local TMPFILE=tmp.$$
