@@ -62,3 +62,12 @@ This adds :Ag to search with ag.
 ## Buffers
 
 bd - delete buffer
+
+## plug
+
+https://github.com/junegunn/vim-plug
+
+:PlugInstall
+:PlugUpdate
+:PlugClean
+
