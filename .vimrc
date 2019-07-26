@@ -113,7 +113,7 @@ function StyleCheck()
     endif
 endfunction
 "autocmd BufWritePost *.py call StyleCheck() " call flake8 after write for python files
-autocmd Filetype go set makeprg=go\ build
+autocmd Filetype go map <F7> :GoBuild<CR>
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
     \ 'kinds'     : [
