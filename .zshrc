@@ -60,15 +60,17 @@ if [ -f ~/.zsh_history ]; then
 fi
 ### End History
 
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2
-export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
+#export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2
+#export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
+export PYTHONPATH="$PYTHONPATH":~/google-cloud-sdk/platform/google_appengine
 
 ### Fix PATH
 _IFS="$IFS"; IFS=:
 _PATH="$PATH"; PATH=
 NP=
 [ -e /usr/local/bin/go ] && export GOBIN="$(/usr/local/bin/go env GOROOT)/bin"
-for path in $HOME/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin \
+for path in /usr/local/opt/openssl/bin $HOME/bin /usr/local/bin /usr/bin /bin \
+    /usr/local/sbin /usr/sbin /usr/local/opt/openssl/bin \
     $HOME/.rvm/bin $HOME/google-cloud-sdk/bin \
     /Applications/calibre.app/Contents/console.app/Contents/MacOS \
     /usr/local/bin /usr/bin /bin /usr/sbin /sbin \
@@ -77,7 +79,7 @@ for path in $HOME/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin \
     /usr/local/opt/go/bin $HOME/go/bin $GOBIN /opt/X11/bin $_PATH; do
     [ -d $path ] && NP="$NP:$path"
 done
-PATH=$NP; unset _NP
+PATH=$(/usr/local/bin/pyenv root)/shims:"/usr/local/opt/mysql@5.7/bin":$NP; unset _NP
 export PATH; unset _PATH
 IFS=$_IFS; unset _IFS
 
