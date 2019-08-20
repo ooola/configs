@@ -99,6 +99,7 @@ alias vi='/usr/local/bin/vim'
 alias aws='/usr/local/bin/aws' # the AWS in optimizely is old and needs to die
 alias ag='ag --path-to-ignore ~/.ignore'
 alias chrome-no-ext='open /Applications/Google\ Chrome.app --args --disable-extensions'
+alias fixmouse='osascript ~/bin/osx/setMouseTrackingSpeed.scpt 1 && osascript ~/bin/osx/setMouseTrackingSpeed.scpt 5'
 
 ulimit -c 0 # Remove this if you like core files :)
 set -o vi
