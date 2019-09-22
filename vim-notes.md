@@ -71,3 +71,7 @@ https://github.com/junegunn/vim-plug
 :PlugUpdate
 :PlugClean
 
+
+## Golang
+
+Good quick setup guide <https://tpaschalis.github.io/vim-go-setup/>
