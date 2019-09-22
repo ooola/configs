@@ -152,6 +152,7 @@ autocmd Filetype yaml setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab tw
 autocmd Filetype markdown setlocal tabstop=4 shiftwidth=4 softtabstop=4 spell expandtab tw=120
 autocmd Filetype make setlocal tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab tw=80
 autocmd Filetype text setlocal tabstop=4 shiftwidth=4 expandtab ruler spell spelllang=en_us tw=80
+autocmd Filetype tf setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2
 autocmd Filetype zsh setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2
 autocmd Filetype sh setlocal tabstop=4 shiftwidth=4 expandtab softtabstop=4
 
