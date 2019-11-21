@@ -1,4 +1,5 @@
 # Path to your oh-my-zsh installation.
+export PATH=$PATH:/usr/local/bin
 export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Look in ~/.oh-my-zsh/themes/
@@ -14,7 +15,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(git osx brew golang docker aws gpg-agent)
-plugins=(git osx golang docker aws)
+plugins=(git osx golang docker aws tmux)
 
 source $ZSH/oh-my-zsh.sh
 
