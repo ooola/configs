@@ -103,6 +103,12 @@ alias chrome-no-ext='open /Applications/Google\ Chrome.app --args --disable-exte
 alias fixmouse='osascript ~/bin/osx/setMouseTrackingSpeed.scpt 1 && osascript ~/bin/osx/setMouseTrackingSpeed.scpt 5'
 alias cal='gcal --starting-day=1'
 
+# fix ctags on mac
+if [[ -x '/usr/local/bin/ctags' ]]
+then 
+    alias ctags='/usr/local/bin/ctags'
+fi
+
 ulimit -c 0 # Remove this if you like core files :)
 set -o vi
 
