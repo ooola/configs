@@ -35,6 +35,8 @@ if [ "$USE_GPG_AGENT" = true ]; then
 	fi
 fi
 
+export NNN_BMS='d:~/Documents;D:~/Downloads/'
+
 # Prompt
 setopt PROMPT_SUBST
 function printDevEnvironment {
@@ -244,3 +246,8 @@ function enable-ee () {
 
 eval "$(rbenv init -)" # this is needed for rbenv
 eval "$(direnv hook zsh)" # run direnv so that it'll pickup .envrc files from repos
+
+## NVM 
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+#[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
