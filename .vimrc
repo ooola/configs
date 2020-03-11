@@ -2,7 +2,15 @@
 call plug#begin('~/.vim/plugged')
 
 " General
-Plug 'Shougo/neocomplete.vim'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  let g:deoplete#enable_at_startup = 1
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+"Plug 'Shougo/neocomplete.vim'
 if executable('ctags')
     Plug 'majutsushi/tagbar'
 endif
@@ -91,6 +99,9 @@ map <silent>,j <C-w>j
 map <silent>,k <C-w>k
 map <silent>,l <C-w>l
 
+" insert escape remapping
+imap jk <Esc>
+
 nmap <F6> :NERDTreeToggle<CR>
 
 " set leader from \ (default) to ,
@@ -142,6 +153,7 @@ let g:tagbar_type_go = {
     \ 'ctagsargs' : '-sort -silent'
 \ }
 autocmd FileType c,cpp setlocal cindent tabstop=4 shiftwidth=4 softtabstop=4 expandtab tw=80
+autocmd BufRead,BufNewFile,BufEnter ~/workspace/c-sdk/* setlocal tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab tw=80
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2 conceallevel=0
 autocmd Filetype json setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2
@@ -175,3 +187,23 @@ let g:pymode_rope = 0
 let g:pymode_rope_lookup_project = 0
 let g:pymode_rope_complete_on_dot = 0
 let g:pymode_rope_autoimport = 0
+
+if has('nvim')
+    set clipboard+=unnamed
+    let g:python2_host_prog = '/usr/bin/python'
+    let g:python3_host_prog = '/usr/local/bin/python3'
+    if $TMUX == ''
+        let g:clipboard = {
+          \   'name': 'myClipboard',
+          \   'copy': {
+          \      '+': 'tmux load-buffer -',
+          \      '*': 'tmux load-buffer -',
+          \    },
+          \   'paste': {
+          \      '+': 'tmux save-buffer -',
+          \      '*': 'tmux save-buffer -',
+          \   },
+          \   'cache_enabled': 1,
+          \ }
+    endif
+endif
