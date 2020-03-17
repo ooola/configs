@@ -105,7 +105,9 @@ export SSH_KEY_PATH="~/.ssh/dsa_id"
 # For a full list of active aliases, run `alias`.
 alias destruct='ssh-add -D'
 alias verify='ssh-add ~/.ssh/id_rsa ~/.ssh/id_rsa_legacy ~/.ssh/id_ed25519'
-alias vi='nvim'
+if type nvim >& /dev/null; then
+  alias vi='nvim'
+fi
 alias aws='/usr/local/bin/aws' # the AWS in optimizely is old and needs to die
 alias ag='ag --path-to-ignore ~/.ignore'
 alias chrome-no-ext='open /Applications/Google\ Chrome.app --args --disable-extensions'
