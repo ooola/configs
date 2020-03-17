@@ -48,7 +48,10 @@ function printKeyStatus {
   if [ "$USE_GPG_AGENT" = true ]; then
     echo %{$fg[yellow]%} \(YubiKey\)%{$reset_color%}
   else
-    [ "$(ssh-add -l)" = "The agent has no identities." ] || echo %{$fg[blue]%}\(KEYS\)%{$reset_color%}
+    # only run if ssh-add exists
+    if type ssh-add >& /dev/null; then
+      [ "$(ssh-add -l)" = "The agent has no identities." ] || echo %{$fg[blue]%}\(KEYS\)%{$reset_color%}
+    fi
   fi
 }
 PROMPT='
@@ -63,9 +66,9 @@ if [ -f ~/.zsh_history ]; then
 fi
 ### End History
 
-#export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2
-#export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
 export PYTHONPATH="$PYTHONPATH":~/google-cloud-sdk/platform/google_appengine
+export PYENV_ROOT="~/.pyenv"
+export PIPENV_PYTHON="$PYENV_ROOT/shims/python"
 
 ### Fix PATH
 _IFS="$IFS"; IFS=:
@@ -82,12 +85,16 @@ for path in /usr/local/opt/openssl/bin $HOME/bin /usr/local/bin /usr/bin /bin \
     /usr/local/opt/go/bin $HOME/go/bin $GOBIN /opt/X11/bin $_PATH; do
     [ -d $path ] && NP="$NP:$path"
 done
-PATH=$(/usr/local/bin/pyenv root)/shims:"/usr/local/opt/mysql@5.7/bin":$NP; unset _NP
-export PATH; unset _PATH
+PATH=$NP; unset _NP
 IFS=$_IFS; unset _IFS
+export PATH; unset _PATH
+
+if type pyenv >& /dev/null; then # only run if pyenv is present
+  export PATH=$(/usr/local/bin/pyenv root)/shims:$PATH
+fi
 
 export GOPATH=$HOME/go
-export EDITOR='vim'
+export EDITOR='nvim'
 export LESS="-F -X $LESS" # tells less not to paginate if less than a page
 
 # allow corefiles (in /core on OS X)
@@ -98,7 +105,7 @@ export SSH_KEY_PATH="~/.ssh/dsa_id"
 # For a full list of active aliases, run `alias`.
 alias destruct='ssh-add -D'
 alias verify='ssh-add ~/.ssh/id_rsa ~/.ssh/id_rsa_legacy ~/.ssh/id_ed25519'
-alias vi='/usr/local/bin/vim'
+alias vi='nvim'
 alias aws='/usr/local/bin/aws' # the AWS in optimizely is old and needs to die
 alias ag='ag --path-to-ignore ~/.ignore'
 alias chrome-no-ext='open /Applications/Google\ Chrome.app --args --disable-extensions'
@@ -244,10 +251,13 @@ function enable-ee () {
 # Experiment Engine configuration                                          #
 ############################################################################
 
-eval "$(rbenv init -)" # this is needed for rbenv
-eval "$(direnv hook zsh)" # run direnv so that it'll pickup .envrc files from repos
+if type rbenv >& /dev/null; then
+  eval "$(rbenv init -)" # this is needed for rbenv
+fi
+if type direnv >& /dev/null; then
+  eval "$(direnv hook zsh)" # run direnv so that it'll pickup .envrc files from repos
+fi
 
 ## NVM 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-#[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
