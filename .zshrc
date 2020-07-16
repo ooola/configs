@@ -164,14 +164,15 @@ function randompass()
     cat /dev/urandom | env LC_CTYPE=C tr -dc "a-zA-Z0-9-_\$\?" | head -c 16; echo
 }
 
+function randomKeyIVSalt() {
+    # spits out salt, key and IV from 32 random bytes.
+    openssl aes-256-cbc -salt -pbkdf2 -iter 100000 -k $(cat /dev/urandom | head -c 32 | base64) -P -md sha512
+}
+
 function showpem() {
     openssl x509 -inform PEM -noout -text -in $1
 }
 
-function random16ByteKey() {
-    # generate 16 randmob bytes Base64-encoded in a string
-    openssl rand -base64 16
-}
 
 function swap() # swap 2 filenames
 {
