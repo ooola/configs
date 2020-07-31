@@ -103,6 +103,8 @@ map <silent>,l <C-w>l
 imap jk <Esc>
 
 nmap <F6> :NERDTreeToggle<CR>
+" execute the current buffer (script)
+nmap <F9> :!%:p
 
 " set leader from \ (default) to ,
 let mapleader = ","
