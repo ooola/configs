@@ -15,7 +15,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(git osx brew golang docker aws gpg-agent)
-plugins=(git osx golang docker aws tmux)
+plugins=(git osx golang docker aws tmux kubectl)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -90,7 +90,8 @@ IFS=$_IFS; unset _IFS
 export PATH; unset _PATH
 
 if type pyenv >& /dev/null; then # only run if pyenv is present
-  export PATH=$(/usr/local/bin/pyenv root)/shims:$PATH
+  #export PATH=$(/usr/local/bin/pyenv root)/shims:$PATH
+  eval "$(pyenv init -)"
 fi
 
 export GOPATH=$HOME/go
@@ -236,7 +237,6 @@ function enable-optimizely ()
 ############################################################################
 # Experiment Engine configuration                                          #
 ############################################################################
-#eval "$(pyenv virtualenv-init -)"
 function enable-ee () {
 
   export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
@@ -261,6 +261,11 @@ if type direnv >& /dev/null; then
   eval "$(direnv hook zsh)" # run direnv so that it'll pickup .envrc files from repos
 fi
 
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+
 ## NVM 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+eval "$(direnv hook zsh)" && direnv allow "/Users/onordstrom/workspace/optimizely/.envrc"
