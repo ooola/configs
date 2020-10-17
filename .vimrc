@@ -127,6 +127,7 @@ function StyleCheck()
 endfunction
 "autocmd BufWritePost *.py call StyleCheck() " call flake8 after write for python files
 autocmd Filetype go map <F7> :GoBuild<CR>
+autocmd Filetype go map <F9> :GoRun<CR>
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
     \ 'kinds'     : [
