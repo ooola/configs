@@ -113,6 +113,8 @@ let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
 
+let g:ruby_host_prog="/usr/local/opt/ruby/bin/ruby"
+
 let NERDTreeQuitOnOpen = 0
 
 " Buffers
@@ -169,7 +171,8 @@ autocmd Filetype make setlocal tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab 
 autocmd Filetype text setlocal tabstop=4 shiftwidth=4 expandtab ruler spell spelllang=en_us tw=80
 autocmd Filetype tf setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2
 autocmd Filetype zsh setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2
-autocmd Filetype sh setlocal tabstop=4 shiftwidth=4 expandtab softtabstop=4
+"autocmd Filetype sh setlocal tabstop=4 shiftwidth=4 expandtab softtabstop=4
+autocmd Filetype sh setlocal tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab tw=120
 
 " When opening temporary files create the directory if it doesn't exist
 function! s:MkNonExDir(file, buf)
