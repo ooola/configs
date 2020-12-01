@@ -66,17 +66,26 @@ if [ -f ~/.zsh_history ]; then
 fi
 ### End History
 
-export PYTHONPATH="$PYTHONPATH":~/google-cloud-sdk/platform/google_appengine
 export PYENV_ROOT="~/.pyenv"
 export PIPENV_PYTHON="$PYENV_ROOT/shims/python"
+
+############################################################################
+# Backblaze
+############################################################################
+export JAVA_HOME="$(/usr/libexec/java_home)"
+export BZ_UNIVERSE="$HOME/code"
+
+# Golang
+[ -e /usr/local/bin/go ] && export GOBIN="$(/usr/local/bin/go env GOROOT)/bin"
 
 ### Fix PATH
 _IFS="$IFS"; IFS=:
 _PATH="$PATH"; PATH=
 NP=
-[ -e /usr/local/bin/go ] && export GOBIN="$(/usr/local/bin/go env GOROOT)/bin"
-for path in /usr/local/opt/openssl/bin $HOME/bin /usr/local/bin /usr/bin /bin \
-    /usr/local/sbin /usr/sbin /usr/local/opt/openssl/bin \
+for path in /usr/local/opt/openssl/bin $HOME/bin /opt/local/bin /usr/bin /bin \
+    /usr/local/bin /usr/sbin /usr/local/opt/openssl/bin \
+    $BZ_UNIVERSE/bzmono/www/java/scripts $BZ_UNIVERSE/bzmono/bztools/scripts \
+    $BZ_UNIVERSE/configMgmt/scripts \
     $HOME/.rvm/bin $HOME/google-cloud-sdk/bin \
     /Applications/calibre.app/Contents/console.app/Contents/MacOS \
     /usr/local/bin /usr/bin /bin /usr/sbin /sbin \
@@ -88,6 +97,7 @@ done
 PATH=$NP; unset _NP
 IFS=$_IFS; unset _IFS
 export PATH; unset _PATH
+###
 
 if type pyenv >& /dev/null; then # only run if pyenv is present
   #export PATH=$(/usr/local/bin/pyenv root)/shims:$PATH
@@ -109,7 +119,6 @@ alias verify='ssh-add ~/.ssh/id_rsa ~/.ssh/id_rsa_legacy ~/.ssh/id_ed25519'
 if type nvim >& /dev/null; then
   alias vi='nvim'
 fi
-alias aws='/usr/local/bin/aws' # the AWS in optimizely is old and needs to die
 alias ag='ag --path-to-ignore ~/.ignore'
 alias chrome-no-ext='open /Applications/Google\ Chrome.app --args --disable-extensions'
 alias fixmouse='osascript ~/bin/osx/setMouseTrackingSpeed.scpt 1 && osascript ~/bin/osx/setMouseTrackingSpeed.scpt 5'
@@ -145,10 +154,6 @@ fi
 function clean-docker() {
     docker rm -v $(docker ps -a -q -f status=exited)
     docker rmi $(docker images -f "dangling=true" -q)
-}
-
-function datawarehouse() {
-    psql -h prd.dw.optimizely.com -d dw -U onordstrom
 }
 
 function oladiff() {
@@ -219,39 +224,7 @@ function ipaddrs()
 }
 
 ############################################################################
-# Optimizely hrd necessary configuration must happen after cleaned up path #
-############################################################################
-function enable-optimizely () 
-{
-  export MONOLITH_ROOT=~/workspace/optimizely
-  cd $MONOLITH_ROOT
-  source $HOME/google-cloud-sdk/path.zsh.inc
-  source $HOME/google-cloud-sdk/completion.zsh.inc
-  source .envrc
-  export DEV_ENVIRONMENT="HRD-Dev"
-}
-############################################################################
-# End Optimizely hrd configuration                                         #
-############################################################################
-
-############################################################################
-# Experiment Engine configuration                                          #
-############################################################################
-function enable-ee () {
-
-  export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
-  export WORKON_HOME=$HOME/.virtualenvs
-
-  # no necessary since zsh has virtualenvwrapper enabled already
-  # Update, necessary since I remove the zsh virtualenv plugin
-  source /usr/local/bin/virtualenvwrapper.sh
-
-  # autoenv
-  source $(brew --prefix autoenv)/activate.sh
-  export DEV_ENVIRONMENT="ExperimentEngine-Dev"
-}
-############################################################################
-# Experiment Engine configuration                                          #
+# Profile managers
 ############################################################################
 
 if type rbenv >& /dev/null; then
@@ -261,11 +234,4 @@ if type direnv >& /dev/null; then
   eval "$(direnv hook zsh)" # run direnv so that it'll pickup .envrc files from repos
 fi
 
-source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
-
-## NVM 
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-eval "$(direnv hook zsh)" && direnv allow "/Users/onordstrom/workspace/optimizely/.envrc"
+eval "$(direnv hook zsh)"
