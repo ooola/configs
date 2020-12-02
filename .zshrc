@@ -81,8 +81,8 @@ export BZ_UNIVERSE="$HOME/code"
 ### Fix PATH
 _IFS="$IFS"; IFS=:
 _PATH="$PATH"; PATH=
-NP=
-for path in /usr/local/opt/openssl/bin $HOME/bin /opt/local/bin /usr/bin /bin \
+NP=$HOME/bin # initialize NP
+for path in /usr/local/opt/openssl/bin /opt/local/bin /usr/bin /bin \
     /usr/local/bin /usr/sbin /usr/local/opt/openssl/bin \
     $BZ_UNIVERSE/bzmono/www/java/scripts $BZ_UNIVERSE/bzmono/bztools/scripts \
     $BZ_UNIVERSE/configMgmt/scripts \
