@@ -11,7 +11,8 @@ else
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 "Plug 'Shougo/neocomplete.vim'
-if executable('ctags')
+if executable('uctags')
+    g:tagbar_ctags_bin = '/opt/local/bin/uctags'
     Plug 'majutsushi/tagbar'
 endif
 nmap <F8> :TagbarToggle<CR>
@@ -163,6 +164,7 @@ autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2 conceallevel=0
 autocmd Filetype json setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2
 autocmd Filetype python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab tw=120
+autocmd Filetype java setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab tw=120
 autocmd BufRead,BufNewFile,BufEnter ~/workspace/optimizely/* setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab tw=120
 autocmd BufRead,BufNewFile,BufEnter ~/workspace/hermes-airflow/* setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab tw=120
 autocmd Filetype yaml setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab tw=80
