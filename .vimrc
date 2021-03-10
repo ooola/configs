@@ -5,12 +5,12 @@ call plug#begin('~/.vim/plugged')
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   let g:deoplete#enable_at_startup = 1
+  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 else
   Plug 'Shougo/deoplete.nvim'
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
-"Plug 'Shougo/neocomplete.vim'
 if executable('uctags')
     g:tagbar_ctags_bin = '/opt/local/bin/uctags'
     Plug 'majutsushi/tagbar'
@@ -165,6 +165,7 @@ autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab softtabsto
 autocmd Filetype json setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2
 autocmd Filetype python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab tw=120
 autocmd Filetype java setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab tw=120
+autocmd Filetype jsp setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab tw=120
 autocmd BufRead,BufNewFile,BufEnter ~/workspace/optimizely/* setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab tw=120
 autocmd BufRead,BufNewFile,BufEnter ~/workspace/hermes-airflow/* setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab tw=120
 autocmd Filetype yaml setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab tw=80
@@ -199,7 +200,7 @@ let g:pymode_rope_autoimport = 0
 if has('nvim')
     set clipboard+=unnamed
     let g:python2_host_prog = '/usr/bin/python'
-    let g:python3_host_prog = '/usr/local/bin/python3'
+    let g:python3_host_prog = '/opt/local/bin/python3'
     if $TMUX == ''
         let g:clipboard = {
           \   'name': 'myClipboard',
