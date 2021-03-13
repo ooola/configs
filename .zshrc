@@ -147,6 +147,9 @@ if [ -e ~/.fzf ]; then
   source ~/.fzf/shell/completion.zsh
 fi
 
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --ignore-vcs'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
 ############################################################################
 # Miscellaneous functions                                                  #
 ############################################################################
@@ -179,6 +182,11 @@ function showpem() {
     openssl x509 -inform PEM -noout -text -in $1
 }
 
+function javatags() {
+    find . -type f | ag '.java$' > cscope.files
+    uctags -L cscope.files
+    rm cscope.files
+}
 
 function swap() # swap 2 filenames
 {
