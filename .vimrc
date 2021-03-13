@@ -12,8 +12,8 @@ else
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 if executable('uctags')
-    g:tagbar_ctags_bin = '/opt/local/bin/uctags'
     Plug 'majutsushi/tagbar'
+    let g:tagbar_ctags_bin = '/opt/local/bin/uctags'
 endif
 nmap <F8> :TagbarToggle<CR>
 Plug 'flazz/vim-colorschemes'
@@ -106,6 +106,9 @@ imap jk <Esc>
 nmap <F6> :NERDTreeToggle<CR>
 " execute the current buffer (script)
 nmap <F9> :!%:p
+
+" change grep to use ripgrep
+set grepprg=rg\ --vimgrep\ --smart-case\ --follow
 
 " set leader from \ (default) to ,
 let mapleader = ","
