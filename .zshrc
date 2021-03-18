@@ -72,7 +72,10 @@ export PIPENV_PYTHON="$PYENV_ROOT/shims/python"
 ############################################################################
 # Backblaze
 ############################################################################
-export JAVA_HOME="$(/usr/libexec/java_home)"
+#
+if [[ -x '/usr/libexec/java_home' ]]; then
+  export JAVA_HOME="$(/usr/libexec/java_home)"
+fi
 export BZ_UNIVERSE="$HOME/code"
 
 # Golang
@@ -141,7 +144,7 @@ if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
 fi
 
 # fzf via local installation
-if [ -e ~/.fzf ]; then
+if [ -e ~/.fzf/shell ]; then
   _append_to_path ~/.fzf/bin
   source ~/.fzf/shell/key-bindings.zsh
   source ~/.fzf/shell/completion.zsh
