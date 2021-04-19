@@ -83,6 +83,7 @@ set nocompatible
 set backupcopy=no
 set backupdir=~/tmp
 set directory=~/tmp,/tmp,/var/tmp
+set mouse=a
 set nofixendofline  "unfortunately some existing code I have to work with doesn't wan endofline set
 
 syntax on
