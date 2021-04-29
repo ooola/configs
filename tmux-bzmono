@@ -1,0 +1,16 @@
+tmux new-session -s bzmono -n bzmono -d
+tmux send-keys -t bzmono:0 'cd ~/code/bzmono' C-m
+
+tmux new-window -n tomcat -t bzmono:1
+tmux send-keys -t bzmono:1 'cd ~/code/dev-vagrant' C-m
+tmux send-keys -t bzmono:1 './watchTomcatLog' C-m
+
+tmux new-window -n webui -t bzmono:2
+tmux send-keys -t bzmono:2 'cd ~/code/dev-vagrant' C-m
+tmux send-keys -t bzmono:2 './watchWebuiLog' C-m
+
+tmux new-window -n all -t bzmono:3
+tmux send-keys -t bzmono:2 'cd ~/code/dev-vagrant' C-m
+
+tmux new-window -n tmp -t bzmono:4
+tmux send-keys -t bzmono:2 'cd ~/code/dev-vagrant' C-m
