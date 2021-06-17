@@ -126,7 +126,6 @@ alias ag='ag --path-to-ignore ~/.ignore'
 alias chrome-no-ext='open /Applications/Google\ Chrome.app --args --disable-extensions'
 alias fixmouse='osascript ~/bin/osx/setMouseTrackingSpeed.scpt 1 && osascript ~/bin/osx/setMouseTrackingSpeed.scpt 5'
 alias cal='gcal --starting-day=1'
-alias b2='/opt/local/Library/Frameworks/Python.framework/Versions/3.8/bin/b2'
 
 
 # fix ctags on mac
