@@ -20,6 +20,7 @@ Plug 'flazz/vim-colorschemes'
 Plug 'bling/vim-airline'
 Plug 'mattn/emoji-vim'
 Plug 'docker/docker'
+Plug 'tpope/vim-surround'
 
 " Go
 Plug 'fatih/vim-go'
@@ -132,6 +133,10 @@ function StyleCheck()
         call Flake8()
     endif
 endfunction
+
+" enable markdown syntax highlighting
+let g:markdown_fenced_languages = ['html', 'python', 'make', 'vim', 'go', 'c', 'javascript', 'java']
+
 "autocmd BufWritePost *.py call StyleCheck() " call flake8 after write for python files
 autocmd Filetype go map <F7> :GoBuild<CR>
 autocmd Filetype go map <F9> :GoRun<CR>
@@ -162,10 +167,11 @@ let g:tagbar_type_go = {
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
 \ }
-autocmd FileType c,cpp setlocal cindent tabstop=4 shiftwidth=4 softtabstop=4 expandtab tw=80
+autocmd FileType c,cpp,cl setlocal cindent tabstop=4 shiftwidth=4 softtabstop=4 expandtab tw=80
 autocmd BufRead,BufNewFile,BufEnter ~/workspace/c-sdk/* setlocal tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab tw=80
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2 conceallevel=0
+autocmd Filetype typescript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2 conceallevel=0
 autocmd Filetype json setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2
 autocmd Filetype python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab tw=120
 autocmd Filetype java setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab tw=120
