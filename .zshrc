@@ -239,9 +239,6 @@ function ipaddrs()
 # Profile managers
 ############################################################################
 
-if type rbenv >& /dev/null; then
-  eval "$(rbenv init -)" # this is needed for rbenv
-fi
 if type direnv >& /dev/null; then
   eval "$(direnv hook zsh)" # run direnv so that it'll pickup .envrc files from repos
 fi
