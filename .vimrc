@@ -21,6 +21,7 @@ Plug 'bling/vim-airline'
 Plug 'mattn/emoji-vim'
 Plug 'docker/docker'
 Plug 'tpope/vim-surround'
+Plug 'chrisbra/vim-commentary' " select code an type gc to comment it out 
 
 " Go
 Plug 'fatih/vim-go'
@@ -65,6 +66,9 @@ Plug 'junegunn/fzf.vim'
 
 " Git plugin
 Plug 'tpope/vim-fugitive'
+
+" neovim 0.5 plugins
+Plug 'neovim/nvim-lspconfig'
 call plug#end()
 
 colorscheme ir_black
