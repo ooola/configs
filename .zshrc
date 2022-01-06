@@ -14,7 +14,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git macos golang docker tmux kubectl)
+plugins=(git macos golang docker tmux kubectl node)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -238,8 +238,18 @@ function ipaddrs()
 # Profile managers
 ############################################################################
 
+# replaced with use_jenv in ~/.direnvrc
+#if type jenv >& /dev/null; then
+#  export PATH="$HOME/.jenv/bin:$PATH"
+#  eval "$(jenv init -)"
+#fi
+
 if type direnv >& /dev/null; then
   eval "$(direnv hook zsh)" # run direnv so that it'll pickup .envrc files from repos
 fi
 
 eval "$(direnv hook zsh)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
