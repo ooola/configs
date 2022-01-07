@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>blah</title>
+</head>
+<body>
+<p>I'm the content</p>
+
+<script>
+
+function updateContent(newText = '') {
+  const t = document.querySelectorAll('p')[0];
+  t.innerText = newText;
+}
+
+function logHi(newText = 'default string') {
+  console.log(`Hi ${newText}`);
+}
+
+logHi(', hey you!');
+
+</script>
+</body>
+</html>

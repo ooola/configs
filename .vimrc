@@ -174,8 +174,9 @@ let g:tagbar_type_go = {
 autocmd FileType c,cpp,cl setlocal cindent tabstop=4 shiftwidth=4 softtabstop=4 expandtab tw=80
 autocmd BufRead,BufNewFile,BufEnter ~/workspace/c-sdk/* setlocal tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab tw=80
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2
-autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2 conceallevel=0
-autocmd Filetype typescript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2 conceallevel=0
+autocmd BufNewFile *.html 0r ~/.vim/template.html
+autocmd Filetype javascript setlocal tabstop=4 shiftwidth=4 expandtab softtabstop=2 conceallevel=0
+autocmd Filetype typescript setlocal tabstop=4 shiftwidth=4 expandtab softtabstop=2 conceallevel=0
 autocmd Filetype json setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2
 autocmd Filetype python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab tw=120
 autocmd Filetype java setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab tw=120
