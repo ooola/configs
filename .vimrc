@@ -80,6 +80,7 @@ if $TMUX == '' " setting clipboard in tmux gives Nothing in register * when past
     set clipboard+=unnamed
 endif
 set clipboard=unnamed
+set ignorecase
 set nocursorline                "slows down redrawing
 set nofoldenable
 set shell=/bin/sh
