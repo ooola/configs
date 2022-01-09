@@ -1,0 +1,9 @@
+{
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.fontFamily": "Source Code Pro",
+    "vim.vimrc.enable": true,
+    "cmake.configureOnOpen": true,
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    }
+}
