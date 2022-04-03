@@ -76,6 +76,7 @@ if [[ -x '/usr/libexec/java_home' ]]; then
   export JAVA_HOME="$(/usr/libexec/java_home)"
 fi
 export BZ_UNIVERSE="$HOME/code"
+export BZ_NOTARIZATION_ID="ola@backblaze.com"
 
 # Golang
 [ -e /usr/local/bin/go ] && export GOBIN="$(/usr/local/bin/go env GOROOT)/bin"
@@ -88,6 +89,7 @@ for path in /usr/local/opt/openssl/bin /opt/local/bin /usr/bin /bin \
     /usr/local/bin /usr/sbin /usr/local/opt/openssl/bin \
     $BZ_UNIVERSE/bzmono/www/java/scripts $BZ_UNIVERSE/bzmono/bztools/scripts \
     $BZ_UNIVERSE/configMgmt/scripts \
+    /usr/local/bin/bz \
     $HOME/.rvm/bin $HOME/google-cloud-sdk/bin \
     /Applications/calibre.app/Contents/console.app/Contents/MacOS \
     /usr/local/bin /usr/bin /bin /usr/sbin /sbin \
@@ -125,6 +127,7 @@ alias ag='ag --path-to-ignore ~/.ignore'
 alias chrome-no-ext='open /Applications/Google\ Chrome.app --args --disable-extensions'
 alias fixmouse='osascript ~/bin/osx/setMouseTrackingSpeed.scpt 1 && osascript ~/bin/osx/setMouseTrackingSpeed.scpt 5'
 alias cal='gcal --starting-day=1'
+alias ipinfo='curl ipinfo.io'
 
 
 # fix ctags on mac
