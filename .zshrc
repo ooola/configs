@@ -14,7 +14,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git macos golang docker tmux kubectl node)
+plugins=(git macos golang docker kubectl node)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -65,7 +65,7 @@ if [ -f ~/.zsh_history ]; then
 fi
 ### End History
 
-export PYENV_ROOT="~/.pyenv"
+export PYENV_ROOT="${HOME}/.pyenv"
 export PIPENV_PYTHON="$PYENV_ROOT/shims/python"
 
 ############################################################################
@@ -79,13 +79,13 @@ export BZ_UNIVERSE="$HOME/code"
 export BZ_NOTARIZATION_ID="ola@backblaze.com"
 
 # Golang
-[ -e /usr/local/bin/go ] && export GOBIN="$(/usr/local/bin/go env GOROOT)/bin"
+[ -e /usr/local/bin/go ] && export GOBIN="$(/usr/local/bin/go env GOBIN)"
 
 ### Fix PATH
 _IFS="$IFS"; IFS=:
 _PATH="$PATH"; PATH=
 NP=$HOME/bin # initialize NP
-for path in /usr/local/opt/openssl/bin /opt/local/bin /usr/bin /bin \
+for path in /usr/local/opt/openssl/bin /usr/bin /bin \
     /usr/local/bin /usr/sbin /usr/local/opt/openssl/bin \
     $BZ_UNIVERSE/bzmono/www/java/scripts $BZ_UNIVERSE/bzmono/bztools/scripts \
     $BZ_UNIVERSE/configMgmt/scripts \
@@ -112,10 +112,11 @@ export GOPATH=$HOME/go
 export EDITOR='nvim'
 export LESS="-F -X $LESS" # tells less not to paginate if less than a page
 
+# to log TLS pre-master secrets set this and start chrome/firefox/...
+#export SSLKEYLOGFILE=~/tls-key.log
+
 # allow corefiles (in /core on OS X)
 limit -s coredumpsize unlimited
-
-export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 # For a full list of active aliases, run `alias`.
 alias destruct='ssh-add -D'
