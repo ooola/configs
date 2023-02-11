@@ -2,3 +2,12 @@ use_jenv() {
   export PATH="$HOME/.jenv/bin:$PATH"
   eval "$(jenv init -)"
 }
+
+## now add "use_nodejs 10.15.0" to your project’s .envrc:
+
+use_nodejs() {
+    NODE_VERSION="$1"
+
+    type nvm >/dev/null 2>&1 || . ~/.nvm/nvm.sh
+    nvm use "$NODE_VERSION"
+}
