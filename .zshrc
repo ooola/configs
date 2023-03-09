@@ -36,6 +36,8 @@ fi
 
 export NNN_BMS='d:~/Documents;D:~/Downloads/'
 
+export DISPLAY=:0
+
 # Prompt
 setopt PROMPT_SUBST
 function printDevEnvironment {
