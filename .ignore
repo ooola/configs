@@ -1,3 +1,5 @@
 # AG ignore file
 # https://github.com/ggreer/the_silver_searcher/wiki/Advanced-Usage
 zxcvbn.js
+*node_modules*
+*.min.*
