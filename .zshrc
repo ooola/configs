@@ -74,8 +74,13 @@ export PIPENV_PYTHON="$PYENV_ROOT/shims/python"
 # Backblaze
 ############################################################################
 #
-if [[ -x '/usr/libexec/java_home' ]]; then
-  export JAVA_HOME="$(/usr/libexec/java_home)"
+#if [[ -x '/usr/libexec/java_home' ]]; then
+#  export JAVA_HOME="$(/usr/libexec/java_home)"
+#fi
+if [[ $(uname -m) == "arm64" ]]; then
+  export JAVA_HOME="/Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home"
+else
+  export JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home"
 fi
 export BZ_UNIVERSE="$HOME/code"
 export BZ_NOTARIZATION_ID="ola@backblaze.com"
@@ -83,11 +88,13 @@ export BZ_NOTARIZATION_ID="ola@backblaze.com"
 # Golang
 [ -e /usr/local/bin/go ] && export GOBIN="$(/usr/local/bin/go env GOBIN)"
 
+
 ### Fix PATH
 _IFS="$IFS"; IFS=:
 _PATH="$PATH"; PATH=
 NP=$HOME/bin # initialize NP
 for path in /usr/local/opt/openssl/bin /usr/bin /bin \
+    /opt/local/bin \
     /usr/local/bin /usr/sbin /usr/local/opt/openssl/bin \
     $BZ_UNIVERSE/bzmono/www/java/scripts $BZ_UNIVERSE/bzmono/bztools/scripts \
     $BZ_UNIVERSE/configMgmt/scripts \
@@ -104,6 +111,9 @@ PATH=$NP; unset _NP
 IFS=$_IFS; unset _IFS
 export PATH; unset _PATH
 ###
+
+# set homebrew
+eval $(/opt/homebrew/bin/brew shellenv)
 
 if type pyenv >& /dev/null; then # only run if pyenv is present
   export PATH="$PYENV_ROOT/bin:$PATH"
@@ -122,8 +132,8 @@ limit -s coredumpsize unlimited
 
 # For a full list of active aliases, run `alias`.
 alias destruct='ssh-add -D'
-alias verify='ssh-add ~/.ssh/id_rsa ~/.ssh/id_rsa_legacy ~/.ssh/id_ed25519'
-if type nvim >& /dev/null; then
+alias verify='ssh-add ~/.ssh/id_rsa ~/.ssh/id_rsa_legacy ~/.ssh/id_ed25519 ~/.ssh/ed25519-m2-mbp'
+if type "nvim" >& /dev/null; then
   alias vi='nvim'
 fi
 alias ag='ag --path-to-ignore ~/.ignore'
@@ -250,12 +260,17 @@ function ipaddrs()
 #  eval "$(jenv init -)"
 #fi
 
+eval $(/opt/homebrew/bin/brew shellenv)
+
 if type direnv >& /dev/null; then
   eval "$(direnv hook zsh)" # run direnv so that it'll pickup .envrc files from repos
 fi
 
 eval "$(direnv hook zsh)"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# nvm is disabled since it cannot compile the older node 10 on macbook m2s and node 10 doesn't support
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
