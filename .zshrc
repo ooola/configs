@@ -152,11 +152,11 @@ fi
 ulimit -c 0 # Remove this if you like core files :)
 set -o vi
 
-# fzf via Homebrew
+# fzf via Homebrew, this allows for ctrl-r to search history
 # CTRL-t to launch
-if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
-  source /usr/local/opt/fzf/shell/key-bindings.zsh
-  source /usr/local/opt/fzf/shell/completion.zsh
+if [ -e /opt/homebrew/opt/fzf/shell/completion.zsh ]; then
+  source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
+  source /opt/homebrew/opt/fzf/shell/completion.zsh
 fi
 
 # fzf via local installation
