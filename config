@@ -1,0 +1,77 @@
+# bzPrepareForDev start ####################################
+Host all
+  HostName 192.168.56.101
+  User vagrant
+  Port 22
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  PasswordAuthentication no
+  IdentityFile /Users/onordstrom/.vagrant.d/boxes/bz-dev-vagrant-arm64/0/parallels/vagrant_private_key
+  IdentitiesOnly yes
+  LogLevel FATAL
+  ForwardAgent yes
+  AddKeysToAgent yes
+# bzPrepareForDev end   ####################################
+
+Host naaas
+  HostName naaas.synology.me
+  Port 2222
+  User ola
+  ForwardAgent yes
+  ServerAliveInterval 180
+  TCPKeepAlive yes
+  StrictHostKeyChecking yes
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/ed25519-m2-mbp
+  DynamicForward 7771
+
+Host sin
+  HostName 172.16.211.5
+  User ola
+  ForwardAgent yes
+  IdentityFile ~/.ssh/ed25519-m2-mbp
+  DynamicForward 7771
+  ServerAliveInterval 180
+  TCPKeepAlive yes
+  StrictHostKeyChecking yes
+  AddKeysToAgent yes
+
+Host sinbu
+  HostName 172.16.211.161
+  Port 22
+  User ola
+  IdentityFile ~/.ssh/ed25519-m2-mbp
+
+  # 
+  # Host health
+  #   HostName 172.16.211.108
+  #   User ola
+  #   ForwardAgent yes
+  #   ServerAliveInterval 180
+  #   DynamicForward 7222
+  # 
+Host tri
+  HostName triblock.com
+  User ola
+  ForwardAgent yes
+  ServerAliveInterval 180
+  TCPKeepAlive yes
+  StrictHostKeyChecking yes
+  IdentityFile ~/.ssh/ed25519-m2-mbp
+  DynamicForward 7777
+  # 
+  # Host genesis
+  #   HostName 147.189.195.212
+  #   User ubuntu
+  #   ServerAliveInterval 180
+  #   TCPKeepAlive yes
+  #   ForwardAgent yes
+
+  # Doesn't appear to resolve ???
+  #Host yoda
+  #  HostName yoda-00.backblaze.com
+ 
+Host jenkins
+  HostName jenkins-sac1-0001.backblaze.com
+  User onordstrom
+  IdentityFile ~/.ssh/id_rsa
