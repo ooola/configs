@@ -61,7 +61,7 @@ Plug 'chase/vim-ansible-yaml'
 Plug 'hashivim/vim-terraform'
 
 " fzf
-Plug '/usr/local/opt/fzf'
+set rtp+=/opt/homebrew/opt/fzf
 Plug 'junegunn/fzf.vim'
 
 " Git plugin
@@ -114,7 +114,7 @@ nmap <F6> :NERDTreeToggle<CR>
 " execute the current buffer (script)
 nmap <F9> :!%:p
 
-" change grep to use ripgrep
+" change grep to use ripgrep, too cumbersome to use the silver searcher
 set grepprg=rg\ --vimgrep\ --smart-case\ --follow
 
 " set leader from \ (default) to ,
