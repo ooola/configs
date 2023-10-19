@@ -78,7 +78,7 @@ export PIPENV_PYTHON="$PYENV_ROOT/shims/python"
 #  export JAVA_HOME="$(/usr/libexec/java_home)"
 #fi
 if [[ $(uname -m) == "arm64" ]]; then
-  export JAVA_HOME="/Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home"
+  export JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home"
 else
   export JAVA_HOME="/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home"
 fi
@@ -123,6 +123,7 @@ fi
 export GOPATH=$HOME/go
 export EDITOR='nvim'
 export LESS="-F -X $LESS" # tells less not to paginate if less than a page
+export TIMEFMT=$'\n================\nCPU\t%P\nuser\t%*U\nsystem\t%*S\ntotal\t%*E'
 
 # to log TLS pre-master secrets set this and start chrome/firefox/...
 #export SSLKEYLOGFILE=~/tls-key.log
