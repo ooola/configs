@@ -1,0 +1,20 @@
+[user]
+	name = Ola Nordstrom
+	email = ola@backblaze.com
+	signingkey = /Users/onordstrom/.ssh/id_rsa.pub
+
+[diff]
+	tool = nvim -d
+[core]
+	excludesfile = /Users/onordstrom/.gitignore_global
+	autocrlf = false
+	hooksPath = /Users/onordstrom/code/gitSolutions/githooks
+[gpg]
+	format = ssh
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[push]
+	autoSetupRemote = true
