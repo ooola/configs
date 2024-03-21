@@ -75,6 +75,7 @@ colorscheme ir_black
 set guioptions+=T               "turn on the toolbar
 set guifont=Source\ Code\ Pro:h12
 set t_Co=256                    "SApprox skipped; terminal only has 8 colors, not 88/256 in
+
 set wrap
 if $TMUX == '' " setting clipboard in tmux gives Nothing in register * when pasting
   set clipboard+=unnamed
@@ -84,7 +85,9 @@ set ignorecase
 set nocursorline                "slows down redrawing
 set nofoldenable
 set shell=/bin/sh
-set nohlsearch
+set hlsearch 			" turn this off by doing :set nohlsearch
+" figureout how to automatically set this
+"set highlight term=NONE ctermfg=grey ctermbg=blue
 set nocompatible
 set backupcopy=no
 set backupdir=~/tmp
@@ -124,7 +127,7 @@ let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
 
-let g:ruby_host_prog="/opt/homebrew/bin/ruby"
+let g:ruby_host_prog="/opt/homebrew/opt/ruby/bin"
 
 let NERDTreeQuitOnOpen = 0
 
@@ -218,8 +221,8 @@ let g:pymode_rope_autoimport = 0
 
 if has('nvim')
     set clipboard+=unnamed
-    let g:python2_host_prog = '/usr/bin/python'
-    let g:python3_host_prog = '/opt/homebrew/bin/python3'
+    " let g:python2_host_prog = '/usr/bin/python'
+    " let g:python3_host_prog = '/opt/homebrew/bin/python3'
     if $TMUX == ''
         let g:clipboard = {
           \   'name': 'myClipboard',
