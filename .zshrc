@@ -1,5 +1,4 @@
 # Path to your oh-my-zsh installation.
-export PATH=$PATH:/usr/local/bin
 export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Look in ~/.oh-my-zsh/themes/
@@ -93,8 +92,7 @@ export BZ_NOTARIZATION_ID="ola@backblaze.com"
 _IFS="$IFS"; IFS=:
 _PATH="$PATH"; PATH=
 NP=$HOME/bin # initialize NP
-for path in /usr/local/opt/openssl/bin /usr/bin /bin \
-    /opt/local/bin \
+for path in /usr/bin /bin \
     /usr/local/bin /usr/sbin /usr/local/opt/openssl/bin \
     $BZ_UNIVERSE/bzmono/www/java/scripts $BZ_UNIVERSE/bzmono/bztools/scripts \
     $BZ_UNIVERSE/configMgmt/scripts \
@@ -115,10 +113,10 @@ export PATH; unset _PATH
 # set homebrew
 eval $(/opt/homebrew/bin/brew shellenv)
 
-if type pyenv >& /dev/null; then # only run if pyenv is present
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init --path)"
-fi
+#if type pyenv >& /dev/null; then # only run if pyenv is present
+#  export PATH="$PYENV_ROOT/bin:$PATH"
+#  eval "$(pyenv init --path)"
+#fi
 
 export GOPATH=$HOME/go
 export EDITOR='nvim'
@@ -262,6 +260,9 @@ function ipaddrs()
 #fi
 
 eval $(/opt/homebrew/bin/brew shellenv)
+
+# fix PATH for bz environments
+export PATH=/opt/local/bin:$PATH
 
 if type direnv >& /dev/null; then
   eval "$(direnv hook zsh)" # run direnv so that it'll pickup .envrc files from repos
