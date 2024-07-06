@@ -54,6 +54,7 @@ Plug 'kchmck/vim-coffee-script'
 " Markdown
 " This doesn't look like it is maintained anymore
 " Plug 'plasticboy/vim-markdown'
+Plug 'junegunn/goyo.vim'
 
 " Yaml
 Plug 'chase/vim-ansible-yaml'
