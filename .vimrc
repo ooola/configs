@@ -52,7 +52,8 @@ Plug 'briancollins/vim-jst'
 Plug 'kchmck/vim-coffee-script'
 
 " Markdown
-Plug 'plasticboy/vim-markdown'
+" This doesn't look like it is maintained anymore
+" Plug 'plasticboy/vim-markdown'
 
 " Yaml
 Plug 'chase/vim-ansible-yaml'
@@ -127,7 +128,7 @@ let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
 
-let g:ruby_host_prog="/opt/homebrew/opt/ruby/bin"
+let g:ruby_host_prog="/opt/homebrew/opt/ruby/bin/ruby"
 
 let NERDTreeQuitOnOpen = 0
 
@@ -195,7 +196,7 @@ autocmd Filetype text setlocal tabstop=4 shiftwidth=4 expandtab ruler spell spel
 autocmd Filetype tf setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2
 autocmd Filetype zsh setlocal tabstop=2 shiftwidth=2 expandtab softtabstop=2
 "autocmd Filetype sh setlocal tabstop=4 shiftwidth=4 expandtab softtabstop=4
-autocmd Filetype sh setlocal tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab tw=120
+autocmd Filetype sh setlocal tabstop=4 shiftwidth=4 softtabstop=2 noexpandtab tw=120
 autocmd Filetype groovy setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 autocmd BufRead,BufNewFile,BufEnter *.jenkinsfile setf groovy
 
@@ -223,6 +224,7 @@ if has('nvim')
     set clipboard+=unnamed
     " let g:python2_host_prog = '/usr/bin/python'
     " let g:python3_host_prog = '/opt/homebrew/bin/python3'
+    let g:python3_host_prog = '/opt/local/bin/python3'
     if $TMUX == ''
         let g:clipboard = {
           \   'name': 'myClipboard',
