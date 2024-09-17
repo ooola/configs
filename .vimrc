@@ -223,9 +223,11 @@ let g:pymode_rope_autoimport = 0
 
 if has('nvim')
     set clipboard+=unnamed
-    " let g:python2_host_prog = '/usr/bin/python'
-    " let g:python3_host_prog = '/opt/homebrew/bin/python3'
-    let g:python3_host_prog = '/opt/local/bin/python3'
+    " vim now seems to find this from the env on os x
+    "let g:python2_host_prog = '/usr/bin/python'
+    "let g:python3_host_prog = '/opt/homebrew/bin/python3'
+    "let g:python3_host_prog = '~/.pyenv/shims/python3'
+    let g:loaded_perl_provider = 0
     if $TMUX == ''
         let g:clipboard = {
           \   'name': 'myClipboard',
