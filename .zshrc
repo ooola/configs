@@ -93,7 +93,7 @@ _IFS="$IFS"; IFS=:
 _PATH="$PATH"; PATH=
 NP=$HOME/bin # initialize NP
 for path in /usr/bin /bin \
-    /usr/local/bin /usr/sbin /usr/local/opt/openssl/bin \
+    /usr/local/bin /usr/sbin \
     $BZ_UNIVERSE/bzmono/www/java/scripts $BZ_UNIVERSE/bzmono/bztools/scripts \
     $BZ_UNIVERSE/configMgmt/scripts \
     /usr/local/bin/bz \
@@ -102,7 +102,7 @@ for path in /usr/bin /bin \
     /usr/local/bin /usr/bin /bin /usr/sbin /sbin \
     /usr/local/texlive/2015/bin/x86_64-darwin \
     $HOME/Library/Android/sdk/platform-tools $HOME/tools/arcanist/bin \
-    /usr/local/opt/go/bin $HOME/go/bin $GOBIN /opt/X11/bin $_PATH; do
+    $HOME/go/bin $GOBIN $_PATH; do
     [ -d $path ] && NP="$NP:$path"
 done
 PATH=$NP; unset _NP
@@ -113,10 +113,10 @@ export PATH; unset _PATH
 # set homebrew
 eval $(/opt/homebrew/bin/brew shellenv)
 
-#if type pyenv >& /dev/null; then # only run if pyenv is present
-#  export PATH="$PYENV_ROOT/bin:$PATH"
-#  eval "$(pyenv init --path)"
-#fi
+if type pyenv >& /dev/null; then # only run if pyenv is present
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init --path)"
+fi
 
 export GOPATH=$HOME/go
 export EDITOR='nvim'
@@ -260,9 +260,6 @@ function ipaddrs()
 #fi
 
 eval $(/opt/homebrew/bin/brew shellenv)
-
-# fix PATH for bz environments
-export PATH=/opt/local/bin:$PATH
 
 if type direnv >& /dev/null; then
   eval "$(direnv hook zsh)" # run direnv so that it'll pickup .envrc files from repos
