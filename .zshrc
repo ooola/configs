@@ -48,10 +48,18 @@ function printKeyStatus {
   if [ "$USE_GPG_AGENT" = true ]; then
     echo %{$fg[yellow]%} \(YubiKey\)%{$reset_color%}
   else
-    # only run if ssh-add exists
-    if type ssh-add >& /dev/null; then
-      [ "$(ssh-add -l)" = "The agent has no identities." ] || echo %{$fg[blue]%}\(KEYS\)%{$reset_color%}
-    fi
+
+    # test to see whether ssh-add -l holds keys, if so the line look like
+    # 4096 SHA256:VdQup...PUk name@server
+    # otherwise it may say: 
+    #   "Could not open a connection to your authentication agent." or
+    #   "The agent has no identities."
+
+    # verify that the KEYSIZE is a number, not any of the error strings
+    KEYSIZE=`ssh-add -l 2>&1 | awk -F ' ' '{ print $1; }' | head -n 1`
+    re='^[0-9]+$'
+    [[ $KEYSIZE =~ $re ]] && echo %{$fg[blue]%}\(KEYS\)%{$reset_color%}
+
   fi
 }
 PROMPT='
@@ -111,12 +119,14 @@ export PATH; unset _PATH
 ###
 
 # set homebrew
-eval $(/opt/homebrew/bin/brew shellenv)
-
-if type pyenv >& /dev/null; then # only run if pyenv is present
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init --path)"
+if type /opt/homebrew/bin/brew >& /dev/null; then
+  eval $(/opt/homebrew/bin/brew shellenv)
 fi
+
+#if type pyenv >& /dev/null; then # only run if pyenv is present
+#  eval "$(pyenv init --path)"
+#  export PATH="$PYENV_ROOT/bin:$PATH"
+#fi
 
 export GOPATH=$HOME/go
 export EDITOR='nvim'
@@ -258,8 +268,6 @@ function ipaddrs()
 #  export PATH="$HOME/.jenv/bin:$PATH"
 #  eval "$(jenv init -)"
 #fi
-
-eval $(/opt/homebrew/bin/brew shellenv)
 
 if type direnv >& /dev/null; then
   eval "$(direnv hook zsh)" # run direnv so that it'll pickup .envrc files from repos
