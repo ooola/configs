@@ -1,5 +1,26 @@
+# very important these files are relative from the 'root' of the git repository
 .envrc
 tags
 DS_Store
 .idea
 coverage
+.nvmrc
+
+# bzmono.git files
+www/static_html/bzapp_web_assets/business_groups/package-lock.json
+www/static_html/bzapp_web_assets/bzadmin/package-lock.json
+www/static_html/bzapp_web_assets/bzapp/package-lock.json
+www/ola
+www/olas-clean-gradle-rebuild.sh
+www/olas-dep-check.sh
+www/dashs-unseal-task.sh
+www/dummy.py
+www/java/src/mail.dev.properties
+www/java/src/mail.dev.properties
+patches
+
+# dev-vagrant.git custom b1 specs
+reifySpecs/ola+b1.json
+reifySpecs/ola+b2.json
+
+
