@@ -1,0 +1,12 @@
+{
+    "accounts": [
+      {
+        "email": "ola+b1@backblaze.com",
+        "enabledProducts": [ "B1" ],
+        "password": "this is a long password 390",
+        "paymentMethod": null,
+        "phoneNumber": "954-937-0493"
+      }
+    ]
+  }
+  
