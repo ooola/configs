@@ -74,7 +74,7 @@ Plug 'neovim/nvim-lspconfig'
 call plug#end()
 
 colorscheme ir_black
-set guioptions+=T               "turn on the toolbar
+"set guioptions+=T               "turn on the toolbar
 set guifont=Source\ Code\ Pro:h12
 set t_Co=256                    "SApprox skipped; terminal only has 8 colors, not 88/256 in
 
@@ -143,6 +143,15 @@ function StyleCheck()
         call Flake8()
     endif
 endfunction
+
+function! s:DiffWithSaved()
+    let filetype=&ft
+    diffthis
+    vnew | r # | normal! 1Gdd
+    diffthis
+    exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+endfunction
+com! DiffSaved call s:DiffWithSaved()
 
 " enable markdown syntax highlighting
 let g:markdown_fenced_languages = ['html', 'python', 'make', 'vim', 'go', 'c', 'javascript', 'java']
